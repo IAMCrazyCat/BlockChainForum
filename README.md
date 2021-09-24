@@ -1,2 +1,0 @@
-# BlockChainForum
-Course Project Practice
