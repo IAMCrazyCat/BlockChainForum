@@ -1,4 +1,4 @@
-package com.blockchainform;
+package com.blockchainforum;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
