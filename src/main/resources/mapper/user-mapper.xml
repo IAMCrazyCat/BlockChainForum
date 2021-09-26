@@ -3,10 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.blockchainforum.ForumUserMapper">
+<mapper namespace="com.blockchainforum.dao.ForumUserMapper">
     <select id="selectById" resultType="ForumUser">
-        select uid, pwd, gender, createTime, email, introduction, avatar
-        from forumeuser
+        select uid, pwd, gender, createtime, email, introduction, avatar
+        from forumuser
         where uid = #{uid}
     </select>
 </mapper>

@@ -6,7 +6,7 @@ public class ForumUser {
     //field
     private int uid;
     private String pwd;
-    private String gender;
+    private int gender;
     private Date createTime;
     private String email;
     private String introduction;
@@ -28,11 +28,11 @@ public class ForumUser {
         this.pwd = pwd;
     }
 
-    public String getGender() {
+    public int getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
 
@@ -70,10 +70,10 @@ public class ForumUser {
 
     @Override
     public String toString() {
-        return "Forumuser{" +
+        return "ForumUser{" +
                 "uid=" + uid +
                 ", pwd='" + pwd + '\'' +
-                ", gender='" + gender + '\'' +
+                ", gender=" + gender +
                 ", createTime=" + createTime +
                 ", email='" + email + '\'' +
                 ", introduction='" + introduction + '\'' +
