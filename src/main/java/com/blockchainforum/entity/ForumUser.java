@@ -5,12 +5,15 @@ import java.sql.Date;
 public class ForumUser {
     //field
     private int uid;
+    private String uname;
     private String pwd;
     private int gender;
     private Date createTime;
     private String email;
     private String introduction;
     private String avatar;
+    private String salt;
+    private String activationCode;
 
     public int getUid() {
         return uid;
@@ -19,6 +22,10 @@ public class ForumUser {
     public void setUid(int uid) {
         this.uid = uid;
     }
+
+    public String getUname() {return uname;}
+
+    public void setUname(String uname) {this.uname = uname;}
 
     public String getPwd() {
         return pwd;
@@ -66,6 +73,22 @@ public class ForumUser {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public String getActivationCode() {
+        return activationCode;
+    }
+
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
     }
 
     @Override

@@ -4,9 +4,49 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.blockchainforum.dao.PostMapper">
+    <sql id="selectFields">
+        pid, uid, title, post_content, status, topic_time, topic_catagory, viewed_number, nice_topic, thumbs_up
+    </sql>
+    <sql id="insertFields">
+        pid, uid, title, post_content, status, topic_time, topic_catagory, viewed_number, nice_topic, thumbs_up
+    </sql>
+    <select id="selectPosts" resultType="Post">
+        select <include refid="selectFields"></include>
+        from post
+        where status != 2
+        <if test="uid != 0">
+            and uid = #{uid}
+        </if>
+        order by topic_time desc
+        limit #{limit}
+    </select>
+
+    <select id="selectDiscussionPostRows" resultType="int">
+        select count(pid)
+        from post
+        where status != 2
+        <if test="uid != 0">
+            and uid = #{uid}
+        </if>
+    </select>
     <select id="selectById" resultType="Post">
-        select pid, uid, title, post_content, status, topic_time, topic_catagory, viewed_number, nice_topic, thumbs_up
+        select <include refid="selectFields"></include>
         from post
         where pid = #{pid} and uid = #{uid}
     </select>
+
+    <insert id="insertPost" parameterType="Post" keyProperty="pid">
+        insert into post (<include refid="insertFields"></include>)
+        values (#{pid}, #{uid}, #{title}, #{post_content}, #{status}, #{topic_time}, #{topic_catagory}, #{viewed_number}, #{nice_topic}, #{thumbs_up})
+    </insert>
+
+    <update id="updatePostComment">
+        update post set post_content = #{post_content}
+    </update>
+    <update id="updatePostNiceTopic">
+        update post set nice_topic = #{nice_topic}
+    </update>
+    <update id="updatePostStatus">
+        update post set status = #{status}
+    </update>
 </mapper>

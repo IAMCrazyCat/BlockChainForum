@@ -93,4 +93,20 @@ public class Post {
     public void setThumbs_up(int thumbs_up) {
         this.thumbs_up = thumbs_up;
     }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "pid=" + pid +
+                ", uid=" + uid +
+                ", title='" + title + '\'' +
+                ", post_content='" + post_content + '\'' +
+                ", status=" + status +
+                ", topic_time=" + topic_time +
+                ", topic_catagory='" + topic_catagory + '\'' +
+                ", viewed_number=" + viewed_number +
+                ", nice_topic=" + nice_topic +
+                ", thumbs_up=" + thumbs_up +
+                '}';
+    }
 }
