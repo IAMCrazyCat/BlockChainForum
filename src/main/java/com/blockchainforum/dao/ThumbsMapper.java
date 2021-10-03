@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface ThumbsMapper {
-    Thumbs selectById(int uid, int pid, int tid);
+    Thumbs selectById(int tid, int uid, int pid);
     int insertThumbs(Thumbs thumbs);
-    int updateThumbs(int uid, int pid, int tid);
+    int deleteThumbs(int tid, int uid, int pid);
 }

@@ -4,9 +4,23 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.blockchainforum.dao.ThumbsMapper">
+    <insert id ="insertThumbs" parameterType="Thumbs">
+        insert tid, uid, pid
+        into thumbs
+        values (#{tid},#{uid},#{pid})
+    </insert>
+
+    <delete id="deleteThumbs">
+        delete on cascade
+        from thumbs
+        where tid = #{tid} and uid = #{uid} and pid = #{pid}
+    </delete>
+
     <select id="selectById" resultType="Thumbs">
         select tid, uid, pid
         from thumbs
-        where tid = #{tid} and uid = #{uid} and pid = #{pid}
+        where tid = #{tid}
     </select>
+
+
 </mapper>
