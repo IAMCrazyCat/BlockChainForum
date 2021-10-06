@@ -1,0 +1,87 @@
+body {
+    background: url('../images/loginBackground.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.card
+{
+    position: relative;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 350px;
+    height: 500px;
+    text-align: center;
+}
+
+ .cardText
+{
+    font: .8em Arial, Tahoma, Verdana;
+    background: #fff url(../static/images/bg.gif) repeat-x;
+    color: black;
+    text-align: left;
+}
+
+.registerText
+{
+   font: .10em Arial, Tahoma, Verdana;
+   background: #fff url(../static/images/bg.gif) repeat-x;
+   color: black;
+   text-align: left;
+}
+
+.accentColorText
+{
+    color: #3d81db;
+    text-align: left;
+}
+
+.shadowEffect
+{
+    background: white;
+    position: relative;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    top: 20px;
+    width: 350px;
+    box-shadow: 0px 0px 16px 2px rgba(0,0,0,0.09), 0px 0px 16px 2px rgba(0,0,0,0.09);
+    padding: 20px;
+    padding-bottom: 50px;
+
+}
+
+.textField
+{
+    border:1px solid gray;
+    border-radius:5px;
+    background:transparent;
+    color:black;
+    width:345px;
+    height:30px;
+    top:0;
+    right:0;
+}
+
+.mainButton
+{
+    position:relative;
+    background:#3d81db;
+    border:none;
+    border-radius:5px 5px 5px 5px;
+    width:350px;
+    height:40px;
+    top:15px;
+    right:0px;
+    cursor:pointer
+
+}
+
+
+.mainButtonText
+{
+    font-size:16px;
+    color:#F9F0DA;
+}
+
