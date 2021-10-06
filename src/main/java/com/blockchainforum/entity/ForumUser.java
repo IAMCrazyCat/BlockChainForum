@@ -5,12 +5,16 @@ import java.sql.Date;
 public class ForumUser {
     //field
     private int uid;
+    private String uname;
     private String pwd;
     private int gender;
     private Date createTime;
     private String email;
     private String introduction;
     private String avatar;
+    private String salt;
+    private int status;
+    private String activationCode;
 
     public int getUid() {
         return uid;
@@ -19,6 +23,10 @@ public class ForumUser {
     public void setUid(int uid) {
         this.uid = uid;
     }
+
+    public String getUname() {return uname;}
+
+    public void setUname(String uname) {this.uname = uname;}
 
     public String getPwd() {
         return pwd;
@@ -68,16 +76,44 @@ public class ForumUser {
         this.avatar = avatar;
     }
 
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public String getActivationCode() {
+        return activationCode;
+    }
+
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "ForumUser{" +
                 "uid=" + uid +
+                ", uname='" + uname + '\'' +
                 ", pwd='" + pwd + '\'' +
                 ", gender=" + gender +
                 ", createTime=" + createTime +
                 ", email='" + email + '\'' +
                 ", introduction='" + introduction + '\'' +
                 ", avatar='" + avatar + '\'' +
+                ", salt='" + salt + '\'' +
+                ", status=" + status +
+                ", activationCode='" + activationCode + '\'' +
                 '}';
     }
 }

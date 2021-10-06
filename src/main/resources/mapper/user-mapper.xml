@@ -4,9 +4,52 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.blockchainforum.dao.ForumUserMapper">
+    <sql id="selectFields">
+        uid, uname, pwd, gender, createtime, email, introduction, avatar, activationcode, salt
+    </sql>
+    <sql id="insertFields">
+        pwd, uname, gender, createtime, email, introduction, avatar, status, activationcode, salt
+    </sql>
     <select id="selectById" resultType="ForumUser">
-        select uid, pwd, gender, createtime, email, introduction, avatar
+        select <include refid="selectFields"></include>
         from forumuser
         where uid = #{uid}
     </select>
+    <select id="selectByName" resultType="ForumUser">
+        select <include refid="selectFields"></include>
+        from forumuser
+        where uname = #{uname}
+    </select>
+    <select id="selectByEmail" resultType="ForumUser">
+        select <include refid="selectFields"></include>
+        from forumuser
+        where email = #{email}
+    </select>
+
+    <insert id="insertUser" parameterType="ForumUser" keyProperty="uid">
+        insert into forumuser (<include refid="insertFields"></include>)
+        values(#{pwd}, #{uname}, #{gender}, #{createTime}, #{email}, #{introduction}, #{avatar}, #{status}, #{activationCode}, #{salt})
+    </insert>
+
+    <update id="updateUserName">
+        update forumuser set uname = #{uname} where uid = #{uid}
+    </update>
+    <update id="updateUserEmail">
+        update forumuser set email = #{email} where uid = #{uid}
+    </update>
+    <update id="updateUserPwd">
+        update forumuser set pwd = #{pwd} where uid = #{uid}
+    </update>
+    <update id="updateUserGender">
+        update forumuser set gender = #{gender} where uid = #{uid}
+    </update>
+    <update id="updateUserIntroduction">
+        update forumuser set introduction = #{introduction} where uid = #{uid}
+    </update>
+    <update id="updateUserAvatar">
+        update forumuser set avatar = #{avatar} where uid = #{uid}
+    </update>
+    <update id="updateUserStatus">
+        update forumuser set status = #{status} where uid = #{uid}
+    </update>
 </mapper>
