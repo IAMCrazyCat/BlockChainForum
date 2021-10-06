@@ -13,19 +13,25 @@
     <delete id="deleteUserComment">
         delete on cascade
         from usercomment
-        where tid = #{tid} and uid = #{uid} and pid = #{pid}
+        where cid = #{cid}
     </delete>
 
     <update id="updateUserComment">
         update usercomment on cascade
             set comment = #{comment}
-        where tid = #{tid} and uid = #{uid} and pid = #{pid}
+        where cid = #{cid} and uid = #{uid} and pid = #{pid}
     </update>
 
-    <select id="selectById" resultType="userComment">
+    <select id="selectById" resultType="UserComment">
         select cid, uid, pid, comment_content
         from usercomment
         where cid = #{cid}
+    </select>
+
+    <select id="selectByUid" resultType="UserComment">
+        select cid, uid, pid, comment_content
+        from usercomment
+        where uid = #{uid}
     </select>
 
 
