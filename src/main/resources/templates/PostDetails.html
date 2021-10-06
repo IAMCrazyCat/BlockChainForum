@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" href="https://static.nowcoder.com/images/logo_87_87.png"/>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" th:href="@{/css/global.css}" />
+  <link rel="stylesheet" th:href="@{/css/PostDetails.css}" />
+  <title>PostDetails</title>
+</head>
+<body>
+<div class="nk-container">
+  <!-- Header -->
+  <header class="bg-dark sticky-top" th:replace="index::header">
+    <div class="container">
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <!-- logo -->
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Function -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item ml-3 btn-group-vertical">
+              <a class="nav-link" href="../index.html">Main Page</a>
+            </li>
+            <li class="nav-item ml-3 btn-group-vertical">
+              <a class="nav-link position-relative" href="letter.html">Message<span class="badge badge-danger">12</span></a>
+            </li>
+            <li class="nav-item ml-3 btn-group-vertical">
+              <a class="nav-link" href="register.html">Register</a>
+            </li>
+            <li class="nav-item ml-3 btn-group-vertical">
+              <a class="nav-link" href="login.html">Login</a>
+            </li>
+            <li class="nav-item ml-3 btn-group-vertical dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src=头像图片 class="rounded-circle" style="width:30px;"/>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item text-center" href="profile.html">Profile</a>
+                <a class="dropdown-item text-center" href="setting.html">Settings</a>
+                <a class="dropdown-item text-center" href="login.html">Logout</a>
+                <div class="dropdown-divider"></div>
+                <span class="dropdown-item text-center text-secondary">BlockChainer</span>
+              </div>
+            </li>
+          </ul>
+          <!-- Search -->
+          <form class="form-inline my-2 my-lg-0" action="search.html">
+            <input class="form-control mr-sm-2" type="search" aria-label="Search" />
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <div class="main">
+    <!-- Post Details -->
+    <div class="container">
+      <!-- Title -->
+      <h6 class="mb-4">
+        <img src=标题图标/>
+        <span th:utext=帖子标题>Bitcoin Mining Firm Marathon Digital Posts 91% Growth in Q3 !</span>
+        <div class="float-right">
+          <button type="button" class="btn btn-danger btn-sm">Top</button>
+          <button type="button" class="btn btn-danger btn-sm">Hot</button>
+          <button type="button" class="btn btn-danger btn-sm">Delete</button>
+        </div>
+      </h6>
+      <!-- Author -->
+      <div class="media pb-3 border-bottom">
+        <a href="profile.html">
+          <img th:src=头像url class="align-self-start mr-4 rounded-circle user-header" alt="Avatar" >
+        </a>
+        <div class="media-body">
+          <div class="mt-0 text-warning" th:utext=用户名username>Dongrui</div>
+          <div class="text-muted mt-3">
+            Posted on <b th:text="${#dates.format(post.createTime,'yyyy-MM-dd HH:mm:ss')}">2021-10-05 19:35:28</b>
+            <ul class="d-inline float-right">
+              <li class="d-inline ml-2"><a href="#" class="text-primary">Like 66</a></li>
+              <li class="d-inline ml-2">|</li>
+              <li class="d-inline ml-2"><a href="#replyform" class="text-primary">Comments <i th:text="评论数量">15</i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Text -->
+      <div class="mt-4 mb-3 content" th:utext="${post.content}">
+        On Monday, October 4, Marathon Digital announced that it obtained the $100 million credit line from crypto-friendly Silvergate bank on Friday October 1.
+
+        The firm stated that it will use the credit to buy more Bitcoin mining equipment and fund its mining operations.
+
+        Marathon also disclosed that the loan would be available for one year and renewed annually by agreements between the firm and Silvergate bank.
+      </div>
+    </div>
+    <!-- Comments -->
+    <div class="container mt-3">
+      <!-- Comments Number -->
+      <div class="row">
+        <div class="col-8">
+          <h6><b class="square"></b> <i th:text=评论数量>15</i> Comments</h6>
+        </div>
+        <div class="col-4 text-right">
+          <a href="#replyform" class="btn btn-primary btn-sm">&nbsp;&nbsp;Comments&nbsp;&nbsp;</a>
+        </div>
+      </div>
+      <!-- Comment List -->
+      <ul class="list-unstyled mt-4">
+        <li class="media pb-3 pt-3 mb-3 border-bottom" th:each=评论>
+          <a href="profile.html">
+            <img th:src="评论用户头像url" class="align-self-start mr-4 rounded-circle user-header" alt="Avatar" >
+          </a>
+          <div class="media-body">
+            <div class="mt-0">
+              <span class="font-size-12 text-success" th:utext="${cvo.user.username}">Cat</span>
+              <span class="badge badge-secondary float-right floor">
+									<i th:text="${page.offset + cvoStat.count}">1</i>#
+								</span>
+            </div>
+            <div class="mt-2" th:utext=评论内容>
+              Where to Invest in Crypto?
+            </div>
+            <div class="mt-4 text-muted font-size-12">
+              <span>Posted on <b th:text=评论时间>2021-10-05 21:54:28</b></span>
+              <ul class="d-inline float-right">
+                <li class="d-inline ml-2"><a href="#" class="text-primary">Like(1)</a></li>
+                <li class="d-inline ml-2">|</li>
+                <li class="d-inline ml-2"><a href="#" class="text-primary">Comments(<i th:text="${cvo.replyCount}">2</i>)</a></li>
+              </ul>
+            </div>
+            <!-- Reply list -->
+            <ul class="list-unstyled mt-4 bg-gray p-3 font-size-12 text-muted">
+
+              <li class="pb-3 pt-3 mb-3 border-bottom" th:each="rvo:${cvo.replys}">
+                <div>
+										<span th:if="${rvo.target==null}">
+											<b class="text-info" th:text="${rvo.user.username}">Dongrui</b>:&nbsp;&nbsp;
+										</span>
+                  <span th:if="${rvo.target!=null}">
+											<i class="text-info" th:text="${rvo.user.username}">Dongrui</i> Reply
+											<b class="text-info" th:text="${rvo.target.username}">Cat</b>:&nbsp;&nbsp;
+										</span>
+                  <span th:utext="${rvo.reply.content}">The shares of Marathon Digital Holdings are known as one of the best performing currently that investors should buy and hold for the next decade.</span>
+                </div>
+                <div class="mt-3">
+                  <span th:text="${#dates.format(rvo.reply.createTime,'yyyy-MM-dd HH:mm:ss')}">2021-10-05 22:54:28</span>
+                  <ul class="d-inline float-right">
+                    <li class="d-inline ml-2"><a href="#" class="text-primary">Like(1)</a></li>
+                    <li class="d-inline ml-2">|</li>
+                    <li class="d-inline ml-2"><a th:href="|#huifu-${rvoStat.count}|" data-toggle="collapse" class="text-primary">Reply</a></li>
+                  </ul>
+                  <div th:id="|huifu-${rvoStat.count}|" class="mt-4 collapse">
+                    <form method="post" th:action="@{|/comment/add/${post.id}|}">
+                      <div>
+                        <input type="text" class="input-size" name="content" th:placeholder="|回复${rvo.user.username}|"/>
+                        <input type="hidden" name="entityType" value="2">
+                        <input type="hidden" name="entityId" th:value="${cvo.comment.id}">
+                        <input type="hidden" name="targetId" th:value="${rvo.user.id}">
+                      </div>
+                      <div class="text-right mt-2">
+                        <button type="submit" class="btn btn-primary btn-sm" onclick="#">&nbsp;&nbsp;Reply&nbsp;</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </li>
+
+              <!-- 回复输入框 -->
+              <li class="pb-3 pt-3">
+                <form method="post" th:action="@{|/comment/add/${post.id}|}">
+                  <div>
+                    <input type="text" class="input-size" name="content" placeholder="Please enter your point about comment"/>
+                    <input type="hidden" name="entityType" value="2">
+                    <input type="hidden" name="entityId" th:value="${cvo.comment.id}">
+                  </div>
+                  <div class="text-right mt-2">
+                    <button type="submit" class="btn btn-primary btn-sm" onclick="#">&nbsp;Reply&nbsp;</button>
+                  </div>
+                </form>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+      <!-- 分页 -->
+      <nav class="mt-5" th:replace="index::pagination">
+        <ul class="pagination justify-content-center">
+          <li class="page-item"><a class="page-link" href="#">First</a></li>
+          <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">4</a></li>
+          <li class="page-item"><a class="page-link" href="#">5</a></li>
+          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          <li class="page-item"><a class="page-link" href="#">Last</a></li>
+        </ul>
+      </nav>
+    </div>
+    <!-- 回帖输入 -->
+    <div class="container mt-3">
+      <form class="replyform" method="post" th:action="@{|/comment/add/${post.id}|}">
+        <p class="mt-3">
+          <a name="replyform"></a>
+          <textarea placeholder="Please enter your point about post" name="content"></textarea>
+          <input type="hidden" name="entityType" value="1">
+          <input type="hidden" name="entityId" th:value="${post.id}">
+        </p>
+        <p class="text-right">
+          <button type="submit" class="btn btn-primary btn-sm">&nbsp;&nbsp;Comment&nbsp;</button>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark">
+    <div class="container">
+      <div class="row">
+        <!-- 二维码 -->
+        <div class="col-4 qrcode">
+          <img src="https://uploadfiles.nowcoder.com/app/app_download.png" class="img-thumbnail" style="width:136px;" />
+        </div>
+        <!-- Company information -->
+        <div class="col-8 detail-info">
+          <div class="row">
+            <div class="col">
+              <ul class="nav">
+                <li class="nav-item">
+                  <a class="nav-link text-light" href="#">About Us</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-light" href="#">Join Us</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-light" href="#">FAQ</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-light" href="#">Help</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-light" href="#">Contact Us</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-light" href="#">Announcements</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <ul class="nav btn-group-vertical company-info">
+                <li class="nav-item text-white-50">
+                  Contact details : 61-416928766(phone)&nbsp;&nbsp;&nbsp;&nbsp;2631096824@qq.com
+                </li>
+                <li class="nav-item text-white-50">
+                  ELEC5619Group39©2021 All rights reserved
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script th:src="@{/js/global.js}"></script>
+</body>
+</html>
