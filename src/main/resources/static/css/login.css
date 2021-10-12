@@ -9,7 +9,17 @@ body {
 }
 
 .horizontalCell {
-  display: inline-block
+  display: display: inline;
+}
+
+.fullHeight {
+  height: 100%;
+}
+
+img {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
 }
 
 .card
@@ -35,6 +45,12 @@ body {
     padding-bottom: 50px;
 }
 
+.centerHorizontallyAndVertically{
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+}
+
  .cardText
 {
     font: .8em Arial, Tahoma, Verdana;
@@ -57,7 +73,9 @@ body {
     text-align: left;
 }
 
-
+.centerText{
+    text-align: center;
+}
 
 .textField
 {
