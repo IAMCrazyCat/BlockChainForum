@@ -16,5 +16,8 @@ public interface ForumUserMapper {
     int updateUserPwd(int uid, String pwd);
     int updateUserGender(int uid, int gender);
     int updateUserIntroduction(int uid, String introduction);
+
+    int updateUserStatus(int uid, int status);
+
     int updateUserAvatar(int uid, String avatar);
 }

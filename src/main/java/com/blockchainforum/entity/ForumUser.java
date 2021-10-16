@@ -13,6 +13,8 @@ public class ForumUser {
     private String introduction;
     private String avatar;
     private String salt;
+    private int status;
+
     private String activationCode;
 
     public int getUid() {
@@ -91,16 +93,30 @@ public class ForumUser {
         this.activationCode = activationCode;
     }
 
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+
     @Override
     public String toString() {
         return "ForumUser{" +
                 "uid=" + uid +
+                ", uname='" + uname + '\'' +
                 ", pwd='" + pwd + '\'' +
                 ", gender=" + gender +
                 ", createTime=" + createTime +
                 ", email='" + email + '\'' +
                 ", introduction='" + introduction + '\'' +
                 ", avatar='" + avatar + '\'' +
+                ", salt='" + salt + '\'' +
+                ", status=" + status +
+                ", activationCode='" + activationCode + '\'' +
                 '}';
     }
 }

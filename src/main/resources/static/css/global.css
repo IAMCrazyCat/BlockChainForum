@@ -9,7 +9,9 @@ body {
 	height: 100%;
 }
 
-.blockchain-container {
+
+.nk-container {
+
 	position: relative;
 	height: auto;
 	min-height: 100%;
@@ -21,7 +23,6 @@ body {
 }
 
 header .navbar-brand {
-	background: url('http://static.nowcoder.com/images/res/logo/logo-v3.png') no-repeat;
 	background-size: 147px 42px;
 	width: 147px;
 	height: 42px;

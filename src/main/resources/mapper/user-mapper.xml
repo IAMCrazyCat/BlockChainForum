@@ -5,10 +5,12 @@
 
 <mapper namespace="com.blockchainforum.dao.ForumUserMapper">
     <sql id="selectFields">
-        uid, uname, pwd, gender, createtime, email, introduction, avatar
+
+        uid, uname, pwd, gender, createtime, email, introduction, avatar, activationcode, salt
     </sql>
     <sql id="insertFields">
-        pwd, uname, gender, createtime, email, introduction, avatar
+        pwd, uname, gender, createtime, email, introduction, avatar, status, activationcode, salt
+
     </sql>
     <select id="selectById" resultType="ForumUser">
         select <include refid="selectFields"></include>
@@ -28,15 +30,18 @@
 
     <insert id="insertUser" parameterType="ForumUser" keyProperty="uid">
         insert into forumuser (<include refid="insertFields"></include>)
-        values(#{pwd}, #{uname}, #{gender}, #{createTime}, #{email}, #{introduction}, #{avatar})
+        values(#{pwd}, #{uname}, #{gender}, #{createTime}, #{email}, #{introduction}, #{avatar}, #{status}, #{activationCode}, #{salt})
+
     </insert>
 
     <update id="updateUserName">
         update forumuser set uname = #{uname} where uid = #{uid}
     </update>
-     <update id="updateUserEmail">
-         update forumuser set email = #{email} where uid = #{uid}
-     </update>
+
+    <update id="updateUserEmail">
+        update forumuser set email = #{email} where uid = #{uid}
+    </update>
+
     <update id="updateUserPwd">
         update forumuser set pwd = #{pwd} where uid = #{uid}
     </update>
@@ -49,4 +54,8 @@
     <update id="updateUserAvatar">
         update forumuser set avatar = #{avatar} where uid = #{uid}
     </update>
+    <update id="updateUserStatus">
+        update forumuser set status = #{status} where uid = #{uid}
+    </update>
+
 </mapper>

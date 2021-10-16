@@ -7,9 +7,12 @@ import java.util.List;
 
 @Mapper
 public interface UserCommentMapper {
-    List<UserComment> selectCommentsByUid(int uid);
-    UserComment selectById(int cid, int uid, int pid);
-    int insertUserComment(int cid, int uid, int pid);
-    int updateUserComment(int cid, int uid, int pid, String comment);
+
+    List<UserComment> selectCommentByPost(int pid, int offset, int limit);
+    int selectCountByPost(int pid);
+    int insertUserComment(UserComment userComment);
+    int updateUserComment(int uid, int pid, int cid, String comment);
+  
     int deleteUserComment(int cid);
+
 }
