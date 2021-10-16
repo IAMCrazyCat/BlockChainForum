@@ -2,6 +2,7 @@ package com.blockchainforum.controller;
 
 import com.blockchainforum.entity.ForumUser;
 import com.blockchainforum.service.UserService;
+
 import com.blockchainforum.util.CommunityConstant;
 import com.google.code.kaptcha.Producer;
 import org.slf4j.Logger;
@@ -28,10 +29,10 @@ import java.util.Map;
 @Controller
 public class LoginController implements CommunityConstant {
     @RequestMapping(path="/register", method = RequestMethod.GET)
-    public String getRegisterPage() {return "register_yrj";}
+    public String getRegisterPage() {return "/site/register_yrj";}
 
     @RequestMapping(path="/login", method = RequestMethod.GET)
-    public String getLoginPage() {return "login_yrj";}
+    public String getLoginPage() {return "/site/login_yrj";}
 
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
     @Autowired
@@ -40,18 +41,22 @@ public class LoginController implements CommunityConstant {
     private Producer kaptchaProducer;
     @Value("${server.servlet.context-path}")
     private String contextPath;
+
     @RequestMapping(path="/register", method = RequestMethod.POST)
     public String register(Model model, ForumUser forumUser) {
         Map<String, Object> map = userService.register(forumUser);
         if(map == null || map.isEmpty()) {
             model.addAttribute("msg", "Successfully send an email to you");
             model.addAttribute("target", "/index");
-            return "operate-result_yrj";
+
+            return "/site/operate-result_yrj";
+
         }else{
             model.addAttribute("userNameMsg", map.get("userNameMsg"));
             model.addAttribute("passwordMsg", map.get("passwordMsg"));
             model.addAttribute("emailMsg", map.get("emailMsg"));
-            return "register_yrj";
+
+            return "/site/register_yrj";
         }
     }
 
@@ -69,7 +74,7 @@ public class LoginController implements CommunityConstant {
             model.addAttribute("msg", "Failed to activate!");
             model.addAttribute("target","/index");
         }
-        return "operate-result_yrj";
+        return "/site/operate-result_yrj";
     }
 
     @RequestMapping(path = "/kaptcha", method = RequestMethod.GET)
@@ -92,7 +97,7 @@ public class LoginController implements CommunityConstant {
         String kaptcha = (String) session.getAttribute("kaptcha");
         if(StringUtils.isEmpty(kaptcha) || StringUtils.isEmpty(code) || !kaptcha.equalsIgnoreCase(code)) {
             model.addAttribute("codeMsg", "Verify code is not correct");
-            return "login_yrj";
+            return "/site/login_yrj";
         }
 
         int expiredSeconds = rememberMe ? REMEMBER_EXPIRED_SECONDS : DEFAULT_EXPIRED_SECONDS;
@@ -102,17 +107,18 @@ public class LoginController implements CommunityConstant {
             cookie.setPath(contextPath);
             cookie.setMaxAge(expiredSeconds);
             response.addCookie(cookie);
-            return "redirect:index";
+            return "redirect:index_yrj";
         } else {
             model.addAttribute("usernameMsg", map.get("usernameMsg"));
             model.addAttribute("passwordMsg",map.get("passwordMsg"));
-            return "login_yrj";
+            return "/site/login_yrj";
         }
     }
 
     @RequestMapping(path = "/logout", method = RequestMethod.GET)
     public String logout(@CookieValue("ticket") String ticket) {
         userService.logout(ticket);
-        return "redirect:/login";
+        return "redirect:/site/login_yrj";
     }
+
 }

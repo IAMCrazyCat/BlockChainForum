@@ -8,10 +8,12 @@
         pid, uid, title, post_content, status, topic_time, topic_catagory, viewed_number, nice_topic, thumbs_up
     </sql>
     <sql id="insertFields">
+
         uid, title, post_content, status, topic_time, topic_catagory, viewed_number, nice_topic, thumbs_up, count
     </sql>
     <select id="selectPosts" resultType="Post">
         select <include refid="selectFields"></include>
+
         from post
         where status != 2
         <if test="uid != 0">
@@ -21,6 +23,7 @@
         limit #{limit}
         offset #{offset}
     </select>
+
 
     <select id="selectDiscussionPostRows" resultType="int">
         select count(pid)
@@ -42,6 +45,7 @@
     <insert id="insertPost" parameterType="Post" keyProperty="pid">
         insert into post (<include refid="insertFields"></include>)
         values ( #{uid}, #{title}, #{post_content}, #{status}, #{topic_time}, #{topic_catagory}, #{viewed_number}, #{nice_topic}, #{thumbs_up}, #{count})
+
     </insert>
 
     <update id="updatePostComment">
@@ -54,7 +58,9 @@
         update post set status = #{status}
     </update>
 
+
     <update id="updateCommentCount">
         update post set count = #{count} where pid = #{pid}
     </update>
+
 </mapper>

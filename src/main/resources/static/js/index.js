@@ -5,6 +5,7 @@ $(function(){
 function publish() {
 	$("#publishModal").modal("hide");
 
+
 	var title = $("#recipient-name").val();
 	var content = $("#message-text").val();
 	$.post(
@@ -24,4 +25,5 @@ function publish() {
 			}, 2000);
 		}
 	);
+
 }

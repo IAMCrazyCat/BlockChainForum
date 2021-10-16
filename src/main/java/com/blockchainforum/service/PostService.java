@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.HtmlUtils;
 
+
 import java.util.List;
 
 @Service
@@ -15,6 +16,7 @@ public class PostService {
 
     public List<Post> findPosts(int uid, int offset, int limit) {
         return postMapper.selectPosts(uid, offset, limit);
+
     }
 
     public int findPostRows(int uid) {
@@ -43,4 +45,5 @@ public class PostService {
     public int updateCommmentCount(int id, int commentCount){
         return postMapper.updateCommentCount(id, commentCount);
     }
+
 }

@@ -95,6 +95,7 @@ public class Post {
         this.thumbs_up = thumbs_up;
     }
 
+
     public int getCount() {
         return count;
     }
@@ -102,6 +103,7 @@ public class Post {
     public void setCount(int count) {
         this.count = count;
     }
+
 
     @Override
     public String toString() {

@@ -1,12 +1,14 @@
 package com.blockchainforum;
 
 import com.blockchainforum.dao.ForumUserMapper;
+
 import com.blockchainforum.dao.LoginTicketMapper;
 import com.blockchainforum.dao.MessageMapper;
 import com.blockchainforum.entity.ForumUser;
 import com.blockchainforum.entity.LoginTicket;
 import com.blockchainforum.entity.Message;
 import org.checkerframework.checker.units.qual.A;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,24 +16,28 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+
 import java.util.Date;
+
 import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@ContextConfiguration(classes = BlockchainformApplication.class)
+@ContextConfiguration(classes = BlockchainforumApplication.class)
 public class MapperTest {
 
     @Autowired
     private ForumUserMapper forumUserMapper;
     @Autowired
+
     private LoginTicketMapper loginTicketMapper;
     @Autowired
     private MessageMapper messageMapper;
+
     @Test
-    public void testSelectUser(){
-        ForumUser forumUser = forumUserMapper.selectById(123);
-        System.out.println(forumUser);
+    public void testUpdateUser(){
+        int rows = forumUserMapper.updateUserAvatar(123, "C:\\Users\\YU\\Desktop\\media\\img\\girl.jpg");
+        System.out.println(rows);
     }
 
     @Test
@@ -62,4 +68,5 @@ public class MapperTest {
             System.out.println(message);
         }
     }
+
 }

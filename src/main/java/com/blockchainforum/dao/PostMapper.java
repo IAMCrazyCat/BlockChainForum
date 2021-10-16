@@ -8,10 +8,12 @@ import java.util.List;
 
 @Mapper
 public interface PostMapper {
+
     List<Post> selectPosts(int uid, int offset, int limit);
     int selectDiscussionPostRows(@Param("uid") int uid);
     Post selectPostById(int id);
     List<Post> selectAllPosts();
+
     int insertPost(Post post);
     int updatePostComment(int uid, int pid, String content);
     int updatePostNiceTopic(int uid, int pid, boolean nice_topic);

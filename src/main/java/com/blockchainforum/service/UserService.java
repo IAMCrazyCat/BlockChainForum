@@ -1,10 +1,12 @@
 package com.blockchainforum.service;
 
 import com.blockchainforum.dao.ForumUserMapper;
+
 import com.blockchainforum.dao.LoginTicketMapper;
 import com.blockchainforum.entity.ForumUser;
 import com.blockchainforum.entity.LoginTicket;
 import com.blockchainforum.util.CommunityConstant;
+
 import com.blockchainforum.util.CommunityUtil;
 import com.blockchainforum.util.MailClient;
 import org.apache.catalina.mbeans.UserMBean;
@@ -20,7 +22,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
+
 public class UserService implements CommunityConstant {
+
     @Autowired
     private ForumUserMapper userMapper;
 
@@ -30,8 +34,10 @@ public class UserService implements CommunityConstant {
     @Autowired
     private TemplateEngine templateEngine;
 
+
     @Autowired
     private LoginTicketMapper loginTicketMapper;
+
 
     @Value("${community.path.domain}")
     private String domain;
@@ -76,6 +82,7 @@ public class UserService implements CommunityConstant {
 
         //register
         forumUser.setSalt(CommunityUtil.generateUUID().substring(0,5));
+
         System.out.println("register"+ forumUser.getPwd());
         System.out.println("register" + forumUser.getSalt());
         forumUser.setPwd(CommunityUtil.md5(forumUser.getPwd() + forumUser.getSalt()));
@@ -88,18 +95,22 @@ public class UserService implements CommunityConstant {
 
         userMapper.insertUser(forumUser);
         int uid = userMapper.selectByEmail(forumUser.getEmail()).getUid();
+
         //activation email
         Context context = new Context();
         context.setVariable("email", forumUser.getEmail());
         //http://localhost:8080/community/activation/101/code
+
         String url = domain + contextPath+"/activation/" + uid +  '/' + forumUser.getActivationCode();
         context.setVariable("url",url);
         System.out.println(url);
         String content = templateEngine.process("mail/activation", context);
+
         mailClient.sendMail(forumUser.getEmail(), "Activate account", content);
 
         return map;
     }
+
 
     public int activation(int userId, String code) {
         ForumUser forumUser = userMapper.selectById(userId);
@@ -160,4 +171,5 @@ public class UserService implements CommunityConstant {
     public int updateAvatar(int uid, String avatarURL){
         return userMapper.updateUserAvatar(uid, avatarURL);
     }
+
 }

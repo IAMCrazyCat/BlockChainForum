@@ -4,9 +4,35 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.blockchainforum.dao.UserCommentMapper">
-    <select id="selectById" resultType="userComment">
+    <insert id ="insertUserComment">
+        insert (cid, uid, pid, coment_content)
+        into usercomment
+        values (#{cid},#{uid},#{pid},#{comment_content})
+    </insert>
+
+    <delete id="deleteUserComment">
+        delete on cascade
+        from usercomment
+        where cid = #{cid}
+    </delete>
+
+    <update id="updateUserComment">
+        update usercomment on cascade
+            set comment = #{comment}
+        where cid = #{cid} and uid = #{uid} and pid = #{pid}
+    </update>
+
+    <select id="selectById" resultType="UserComment">
         select cid, uid, pid, comment_content
         from usercomment
-        where cid = #{cid} and uid = #{uid} and pid = #{pid}
+        where cid = #{cid}
     </select>
+
+    <select id="selectByUid" resultType="UserComment">
+        select cid, uid, pid, comment_content
+        from usercomment
+        where uid = #{uid}
+    </select>
+
+
 </mapper>

@@ -1,5 +1,6 @@
 package com.blockchainforum.util;
 
+
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
@@ -7,6 +8,7 @@ import org.thymeleaf.util.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import java.util.UUID;
 
 public class CommunityUtil {
@@ -23,6 +25,7 @@ public class CommunityUtil {
         }
         return DigestUtils.md5DigestAsHex(key.getBytes());
     }
+
 
     public static String getJSONString(int code, String msg, Map<String, Object> map) {
         JSONObject json = new JSONObject();
@@ -49,4 +52,5 @@ public class CommunityUtil {
         map.put("age", 32);
         System.out.println(getJSONString(0,"ok",map));
     }
+
 }

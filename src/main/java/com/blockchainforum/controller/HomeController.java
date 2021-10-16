@@ -1,7 +1,9 @@
 package com.blockchainforum.controller;
 
 import com.blockchainforum.entity.ForumUser;
+
 import com.blockchainforum.entity.Page;
+
 import com.blockchainforum.entity.Post;
 import com.blockchainforum.service.PostService;
 import com.blockchainforum.service.UserService;
@@ -25,6 +27,7 @@ public class HomeController {
     private UserService userService;
 
     @RequestMapping(path = "/index", method = RequestMethod.GET)
+
     public String getIndexPage(Model model, Page page){
 
         page.setRows(postService.findPostRows(7));
@@ -32,6 +35,7 @@ public class HomeController {
         List<Post> list = postService.findPosts(7, page.getOffset(), page.getLimit());
 
 //        List<Post> list = postService.findAllPosts();
+
         List<Map<String, Object>> posts = new ArrayList();
         if(list != null){
             for(Post post : list){
@@ -43,6 +47,8 @@ public class HomeController {
             }
         }
         model.addAttribute("posts", posts);
+
         return "index_yrj";
+
     }
 }
