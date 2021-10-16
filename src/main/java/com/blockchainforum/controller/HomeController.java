@@ -27,9 +27,9 @@ public class HomeController {
     @RequestMapping(path = "/index", method = RequestMethod.GET)
     public String getIndexPage(Model model, Page page){
 
-        page.setRows(postService.findPostRows(1001));
+        page.setRows(postService.findPostRows(7));
         page.setPath("/index");
-        List<Post> list = postService.findPosts(1001, page.getOffset(), page.getLimit());
+        List<Post> list = postService.findPosts(7, page.getOffset(), page.getLimit());
 
 //        List<Post> list = postService.findAllPosts();
         List<Map<String, Object>> posts = new ArrayList();
@@ -43,6 +43,6 @@ public class HomeController {
             }
         }
         model.addAttribute("posts", posts);
-        return "index";
+        return "index_yrj";
     }
 }

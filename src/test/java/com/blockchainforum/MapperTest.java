@@ -2,8 +2,11 @@ package com.blockchainforum;
 
 import com.blockchainforum.dao.ForumUserMapper;
 import com.blockchainforum.dao.LoginTicketMapper;
+import com.blockchainforum.dao.MessageMapper;
 import com.blockchainforum.entity.ForumUser;
 import com.blockchainforum.entity.LoginTicket;
+import com.blockchainforum.entity.Message;
+import org.checkerframework.checker.units.qual.A;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -22,6 +26,8 @@ public class MapperTest {
     private ForumUserMapper forumUserMapper;
     @Autowired
     private LoginTicketMapper loginTicketMapper;
+    @Autowired
+    private MessageMapper messageMapper;
     @Test
     public void testSelectUser(){
         ForumUser forumUser = forumUserMapper.selectById(123);
@@ -47,5 +53,13 @@ public class MapperTest {
         loginTicketMapper.updateStatus("abc", 1);
         loginTicket = loginTicketMapper.selectByTicket("abc");
         System.out.println(loginTicket);
+    }
+
+    @Test
+    public void testSelectLetters() {
+        List<Message> list = messageMapper.selectConversations(111,0, 10);
+        for (Message message : list){
+            System.out.println(message);
+        }
     }
 }

@@ -13,6 +13,7 @@ public class Post {
     private int viewed_number;
     private boolean nice_topic;
     private int thumbs_up;
+    private int count = 0;
 
     public int getPid() {
         return pid;
@@ -92,6 +93,14 @@ public class Post {
 
     public void setThumbs_up(int thumbs_up) {
         this.thumbs_up = thumbs_up;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     @Override

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,10 +28,10 @@ import java.util.Map;
 @Controller
 public class LoginController implements CommunityConstant {
     @RequestMapping(path="/register", method = RequestMethod.GET)
-    public String getRegisterPage() {return "site/register";}
+    public String getRegisterPage() {return "register_yrj";}
 
     @RequestMapping(path="/login", method = RequestMethod.GET)
-    public String getLoginPage() {return "site/login";}
+    public String getLoginPage() {return "login_yrj";}
 
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
     @Autowired
@@ -45,12 +46,12 @@ public class LoginController implements CommunityConstant {
         if(map == null || map.isEmpty()) {
             model.addAttribute("msg", "Successfully send an email to you");
             model.addAttribute("target", "/index");
-            return "site/operate-result";
+            return "operate-result_yrj";
         }else{
             model.addAttribute("userNameMsg", map.get("userNameMsg"));
             model.addAttribute("passwordMsg", map.get("passwordMsg"));
             model.addAttribute("emailMsg", map.get("emailMsg"));
-            return "site/register";
+            return "register_yrj";
         }
     }
 
@@ -68,7 +69,7 @@ public class LoginController implements CommunityConstant {
             model.addAttribute("msg", "Failed to activate!");
             model.addAttribute("target","/index");
         }
-        return "site/operate-result";
+        return "operate-result_yrj";
     }
 
     @RequestMapping(path = "/kaptcha", method = RequestMethod.GET)
@@ -91,7 +92,7 @@ public class LoginController implements CommunityConstant {
         String kaptcha = (String) session.getAttribute("kaptcha");
         if(StringUtils.isEmpty(kaptcha) || StringUtils.isEmpty(code) || !kaptcha.equalsIgnoreCase(code)) {
             model.addAttribute("codeMsg", "Verify code is not correct");
-            return "site/login";
+            return "login_yrj";
         }
 
         int expiredSeconds = rememberMe ? REMEMBER_EXPIRED_SECONDS : DEFAULT_EXPIRED_SECONDS;
@@ -105,7 +106,13 @@ public class LoginController implements CommunityConstant {
         } else {
             model.addAttribute("usernameMsg", map.get("usernameMsg"));
             model.addAttribute("passwordMsg",map.get("passwordMsg"));
-            return "site/login";
+            return "login_yrj";
         }
+    }
+
+    @RequestMapping(path = "/logout", method = RequestMethod.GET)
+    public String logout(@CookieValue("ticket") String ticket) {
+        userService.logout(ticket);
+        return "redirect:/login";
     }
 }
