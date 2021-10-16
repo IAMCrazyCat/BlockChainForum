@@ -28,7 +28,7 @@
         where cid = #{cid}
     </select>
 
-    <select id="selectByUid" resultType="UserComment">
+    <select id="selectCommentsByUid" resultType="UserComment">
         select cid, uid, pid, comment_content
         from usercomment
         where uid = #{uid}

@@ -1,26 +1,31 @@
 package com.blockchainforum.service;
 
+import com.blockchainforum.dao.ThumbsMapper;
 import com.blockchainforum.entity.Thumbs;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ThumbServiceImpl implements ThumbService{
-    public static Map<Integer,Thumbs> thumbsMap=new HashMap<>();
+    //public static Map<Integer,Thumbs> thumbsMap=new HashMap<>();
+    @Autowired
+    private ThumbsMapper thumbsMapper;
 
     @Override
     public void createThumbs(Thumbs thumbs) {
-        thumbsMap.put(thumbs.getTid(),thumbs);
+        thumbsMapper.insertThumbs(thumbs.getTid(),thumbs.getUid(),thumbs.getPid());
     }
 
     @Override
     public void deleteThumbs(int id) {
-        thumbsMap.remove(id);
+        thumbsMapper.deleteThumbs(id);
     }
 
     @Override
-    public Collection<Thumbs> getThumbs() {
-        return thumbsMap.values();
+    public List<Thumbs> getThumbs(int uid) {
+        return thumbsMapper.selectThumbsByUid(uid);
     }
 }
