@@ -1,0 +1,234 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/letter.css}">
+    <title>牛客网-通知</title>
+
+</head>
+<body>
+<div class="nk-container">
+    <!-- header -->
+    <header class="bg-dark sticky-top" th:replace="index::header">
+        <div class="container">
+            <!-- nav bar-->
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item ml-3 btn-group-vertical"><a class="nav-link" href="">Main Page</a></li>
+                        <li class="nav-item ml-3 btn-group-vertical"><a class="nav-link position-relative" href="">Message<span class="badge badge-danger">12</span></a></li>
+                        <li class="nav-item ml-3 btn-group-vertical"><a class="nav-link" href="">Register</a></li>
+                        <li class="nav-item ml-3 btn-group-vertical"><a class="nav-link" href="login.html">Login</a></li>
+                        <li class="nav-item ml-3 btn-group-vertical dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="头像" class="rounded-circle" style="width:30px;"></a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item text-center" href="usercenter.html">User Center</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item text-center" href="">Log Out</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <!-- Search -->
+                    <form class="form-inline my-2 my-lg-0" action="">
+                        <input class="form-control mr-sm-2" type="search" aria-label="Search">
+                        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">🔎</button>
+                    </form>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- main-->
+    <div style="width: 50%; margin: auto" class="main">
+        <div class="container">
+            <!-- announcement list -->
+            <ul class="list">
+                <!-- comment -->
+                <li class="media pb-3 pt-3 mb-3 border-bottom position-relative" th:if="${commentNotice != null}">
+                    <span>💬</span>
+                    <div class="media-body">
+                        <h6 class="mt-0 mb-3">
+                            <span class="float-right text-muted font-size-12" th:text="${#dates.format(commentNotice.message.createTime,'yyyy-MM-dd HH:mm:ss')}">2021-11-22 12:12:22</span>
+                        </h6>
+                        <div>
+                            <a>
+                                <i th:utext="${commentNotice.user.username}">Gilbert</i>
+                                comments on
+                                <b th:text="${commentNotice.entityType==1? '帖子':'回复'}">Post 1. </b></a>
+
+                        </div>
+                    </div>
+                </li>
+                <!--like-->
+                <li class="media pb-3 pt-3 mb-3 border-bottom position-relative" th:if="${likeNotice!=null}">
+                    <span>👍 </span>
+                    <div class="media-body">
+                        <h6 class="mt-0 mb-3">
+                            <span class="float-right text-muted font-size-12" th:text="${#dates.format(likeNotice.message.createTime,'yyyy-MM-dd HH:mm:ss')}">2021-03-22 16:14:21</span>
+                        </h6>
+                        <div>
+                            <a>
+                                <i th:utext="${likeNotice.user.username}">Michael</i>
+                                Likes <b th:text="${commentNotice.entityType==1? '帖子':'回复'}">Post 1. </b></a>
+                        </div>
+                    </div>
+                </li>
+                <!--follow-->
+                <li class="media pb-3 pt-3 mb-3 border-bottom position-relative" th:if="${followNotice!=null}">
+                    <span>❤️</span>
+                    <div class="media-body">
+                        <h6 class="mt-0 mb-3">
+                            <span class="float-right text-muted font-size-12" th:text="${#dates.format(followNotice.message.createTime,'yyyy-MM-dd HH:mm:ss')}">2021-01-45 13:12:34</span>
+                        </h6>
+                        <div>
+                            <a th:href="@{/notice/detail/follow}">
+                                <i th:utext="${followNotice.user.username}">Richard</i> Starts follow you.</a>
+
+                        </div>
+                    </div>
+                </li>
+                <!--follow-->
+                <li class="media pb-3 pt-3 mb-3 border-bottom position-relative" th:if="${followNotice!=null}">
+                    <span>❤️</span>
+                    <div class="media-body">
+                        <h6 class="mt-0 mb-3">
+                            <span class="float-right text-muted font-size-12" th:text="${#dates.format(followNotice.message.createTime,'yyyy-MM-dd HH:mm:ss')}">2021-01-45 13:12:34</span>
+                        </h6>
+                        <div>
+                            <a th:href="@{/notice/detail/follow}">
+                                <i th:utext="${followNotice.user.username}">Richard</i> Starts follow you.</a>
+
+                        </div>
+                    </div>
+                </li><!--follow-->
+                <li class="media pb-3 pt-3 mb-3 border-bottom position-relative" th:if="${followNotice!=null}">
+                    <span>❤️</span>
+                    <div class="media-body">
+                        <h6 class="mt-0 mb-3">
+                            <span class="float-right text-muted font-size-12" th:text="${#dates.format(followNotice.message.createTime,'yyyy-MM-dd HH:mm:ss')}">2021-01-45 13:12:34</span>
+                        </h6>
+                        <div>
+                            <a th:href="@{/notice/detail/follow}">
+                                <i th:utext="${followNotice.user.username}">Richard</i> Starts follow you.</a>
+
+                        </div>
+                    </div>
+                </li><!--follow-->
+                <li class="media pb-3 pt-3 mb-3 border-bottom position-relative" th:if="${followNotice!=null}">
+                    <span>❤️</span>
+                    <div class="media-body">
+                        <h6 class="mt-0 mb-3">
+                            <span class="float-right text-muted font-size-12" th:text="${#dates.format(followNotice.message.createTime,'yyyy-MM-dd HH:mm:ss')}">2021-01-45 13:12:34</span>
+                        </h6>
+                        <div>
+                            <a th:href="@{/notice/detail/follow}">
+                                <i th:utext="${followNotice.user.username}">Richard</i> Starts follow you.</a>
+
+                        </div>
+                    </div>
+                </li><!--follow-->
+                <li class="media pb-3 pt-3 mb-3 border-bottom position-relative" th:if="${followNotice!=null}">
+                    <span>❤️</span>
+                    <div class="media-body">
+                        <h6 class="mt-0 mb-3">
+                            <span class="float-right text-muted font-size-12" th:text="${#dates.format(followNotice.message.createTime,'yyyy-MM-dd HH:mm:ss')}">2021-01-45 13:12:34</span>
+                        </h6>
+                        <div>
+                            <a th:href="@{/notice/detail/follow}">
+                                <i th:utext="${followNotice.user.username}">Richard</i> Starts follow you.</a>
+
+                        </div>
+                    </div>
+                </li><!--follow-->
+                <li class="media pb-3 pt-3 mb-3 border-bottom position-relative" th:if="${followNotice!=null}">
+                    <span>❤️</span>
+                    <div class="media-body">
+                        <h6 class="mt-0 mb-3">
+                            <span class="float-right text-muted font-size-12" th:text="${#dates.format(followNotice.message.createTime,'yyyy-MM-dd HH:mm:ss')}">2021-01-45 13:12:34</span>
+                        </h6>
+                        <div>
+                            <a th:href="@{/notice/detail/follow}">
+                                <i th:utext="${followNotice.user.username}">Richard</i> Starts follow you.</a>
+
+                        </div>
+                    </div>
+                </li><!--follow-->
+                <li class="media pb-3 pt-3 mb-3 border-bottom position-relative" th:if="${followNotice!=null}">
+                    <span>❤️</span>
+                    <div class="media-body">
+                        <h6 class="mt-0 mb-3">
+                            <span class="float-right text-muted font-size-12" th:text="${#dates.format(followNotice.message.createTime,'yyyy-MM-dd HH:mm:ss')}">2021-01-45 13:12:34</span>
+                        </h6>
+                        <div>
+                            <a th:href="@{/notice/detail/follow}">
+                                <i th:utext="${followNotice.user.username}">Richard</i> Starts follow you.</a>
+
+                        </div>
+                    </div>
+                </li><!--follow-->
+                <li class="media pb-3 pt-3 mb-3 border-bottom position-relative" th:if="${followNotice!=null}">
+                    <span>❤️</span>
+                    <div class="media-body">
+                        <h6 class="mt-0 mb-3">
+                            <span class="float-right text-muted font-size-12" th:text="${#dates.format(followNotice.message.createTime,'yyyy-MM-dd HH:mm:ss')}">2021-01-45 13:12:34</span>
+                        </h6>
+                        <div>
+                            <a th:href="@{/notice/detail/follow}">
+                                <i th:utext="${followNotice.user.username}">Richard</i> Starts follow you.</a>
+
+                        </div>
+                    </div>
+                </li><!--follow-->
+                <li class="media pb-3 pt-3 mb-3 border-bottom position-relative" th:if="${followNotice!=null}">
+                    <span>❤️</span>
+                    <div class="media-body">
+                        <h6 class="mt-0 mb-3">
+                            <span class="float-right text-muted font-size-12" th:text="${#dates.format(followNotice.message.createTime,'yyyy-MM-dd HH:mm:ss')}">2021-01-45 13:12:34</span>
+                        </h6>
+                        <div>
+                            <a th:href="@{/notice/detail/follow}">
+                                <i th:utext="${followNotice.user.username}">Richard</i> Starts follow you.</a>
+
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <!-- footer -->
+    <footer class="bg-dark">
+        <div class="container">
+            <div class="row">
+                <!-- logo -->
+                <div class="col-4 qrcode">
+                    <img src="图标" class="img-thumbnail" style="width:136px;">
+                </div>
+                <div class="col-8 detail-info">
+                    <div class="row">
+                        <div class="col">
+                            <ul class="nav">
+                                <li class="nav-item"><a class="nav-link text-light" href="#">Terms</a></li>
+                                <li class="nav-item"><a class="nav-link text-light" href="#">Privacy</a></li>
+                                <li class="nav-item"><a class="nav-link text-light" href="#">Contact Us</a></li>
+                                <li class="nav-item"><a class="nav-link text-light" href="#">© 2021 Group 39</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous" th:inline="none"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script th:src="@{/js/global.js}"></script>
+
+</body></html>
