@@ -4,7 +4,7 @@ html {
 
 body {
 	background: #eee;
-	font-family: arial, STHeiti, 'Microsoft YaHei', \5b8b\4f53;
+	font-family: Montserrat,sans-serif;
 	font-size: 14px;
 	height: 100%;
 }
@@ -20,8 +20,17 @@ body {
 	padding: 0;
 }
 
+#nav a {
+	color: white;
+}
+
+
+header {
+	background-color: black;
+}
+
 header .navbar-brand {
-	background: url('http://static.nowcoder.com/images/res/logo/logo-v3.png') no-repeat;
+	background: url('../images/BlackChainIcon.png') no-repeat;
 	background-size: 147px 42px;
 	width: 147px;
 	height: 42px;
@@ -31,6 +40,8 @@ header .navbar-brand {
 header .navbar {
 	padding: 5px 0;
 	font-size: 16px;
+	font-family: Montserrat,sans-serif;
+	font-weight: bold;
 }
 
 header .badge {
@@ -39,12 +50,15 @@ header .badge {
 	left: 33px;
 }
 
+
+
 footer {
 	padding: 20px 0;
 	font-size: 12px;
 	position: absolute;
 	bottom: 0;
 	width: 100%;
+	background-color: black;
 }
 
 footer .qrcode {
@@ -142,4 +156,9 @@ a:hover {
 em {
 	font-style: normal;
 	color: red;
+}
+
+.sticky-footer{
+	position: sticky;
+	top:100%
 }

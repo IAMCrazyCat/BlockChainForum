@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="icon" href="https://static.nowcoder.com/images/logo_87_87.png"/>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
-  <link rel="stylesheet" th:href="@{/css/global.css}" />
-  <link rel="stylesheet" th:href="@{/css/PostDetails.css}" />
+  <link rel="stylesheet" href="../static/css/global.css" type="text/css" />
+  <link rel="stylesheet" href="../static/css/PostDetails.css" type="text/css" />
   <title>PostDetails</title>
 </head>
 <body>
 <div class="nk-container">
   <!-- Header -->
-  <header class="bg-dark sticky-top" th:replace="index::header">
-    <div class="container">
+  <header class="sticky-top" th:replace="index::header">
+    <div id="headerContainer" class="container">
       <!-- Navigation -->
       <nav class="navbar navbar-expand-lg navbar-dark">
         <!-- logo -->
@@ -220,7 +220,7 @@
   </div>
 
   <!-- Footer -->
-  <footer class="bg-dark">
+  <footer class="sticky-footer">
     <div class="container">
       <div class="row">
         <!-- 二维码 -->
@@ -274,5 +274,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
 <script th:src="@{/js/global.js}"></script>
+<script type="text/javascript" src="../static/js/global.js"></script>
 </body>
 </html>
