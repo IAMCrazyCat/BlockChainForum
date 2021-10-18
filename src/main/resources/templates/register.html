@@ -10,26 +10,31 @@
 </head>
 <body>
 <div id="card" class="card">
-    <div id="frontBox" class="shadowEffect" style="top:100px; width: 350px; height: 350px;">
+    <div id="frontBox" class="shadowEffect" style="top:100px; width: 350px; height: 420px;">
         <div id="frontBoxContent" class="cardText">
-            <h1>Sign in</h1>
-            <p id="tipText">Sign in with your hackInBlockChain.com account to access our services.</p>
+            <h1>Create an account</h1>
+            <p id="tipText">Join hackInBlockChain.com today.</p>
 
-            <p>Email address</p>
+
             <br>
             <form id="signInForm" action="ConnServlet" method="post" style="position:relative; top:-18px;">
+                <p>Nickname</p>
+                <input class="textField" type="password" id="username" name="password" oninput="hideError()">
+                <p>Email address</p>
                 <input id="forwardType" name="forwardType" value="login" style="display:none">
                 <input class="textField" id="email" name="email" oninput="hideError()">
                 <p id="loginEmailEmpty" style="display:none; color:red;">Plase enter your Email address</p>
                 <p>Password</p>
                 <input class="textField" type="password" id="password" name="password" oninput="hideError()">
+
+
                 <p id="loginPasswordEmpty" style="display:none; color:red;">Plase enter your password</p>
-                <p id="loginPasswordWrong" style="display:none; color:red;">The combination of email address and password you entered does not match.</p>
+                <p id="loginPasswordWrong" style="display:none; color:red;">Please fill in all the required options</p>
             </form>
 
-            <button class="mainButton" onclick="signInButtonPressed()"><span id="btnText"class="mainButtonText">Sign in</span></button>
+            <button class="mainButton" onclick="signInBtnAction()"><span id="btnText"class="mainButtonText">Sign up</span></button>
 
-            <p id="registerText" style="position: relative; top: 30px; text-align: center;" >Don't have an account yet? <span style="cursor: pointer; color: #c5464a;" onclick="goSignUpBtnAction()" id="goSignUpBtn"><b class="accentColorText">Sign up</b></span></p>
+            <p id="registerText" style="position: relative; top: 30px; text-align: center;" >Already have an account? <span style="cursor: pointer; color: #c5464a;" onclick="goSignUpBtnAction()" id="goSignUpBtn"><b class="accentColorText">Sign in</b></span></p>
             <p id="forgotText"style="position: relative; top: 30px; text-align: center; cursor: pointer; display: none;" onclick="forgotPasswordAction()">Forget your password?</p>
         </div>
     </div>
