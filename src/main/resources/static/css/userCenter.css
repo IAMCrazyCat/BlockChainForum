@@ -1,0 +1,96 @@
+ body {
+     background: url('../images/loginBackground.jpg');
+     background-repeat: no-repeat;
+     background-size: cover;
+ }
+
+
+ h2 {
+          font-family: Arial, Helvetica, sans-serif;
+      }
+
+
+      p {
+      font-family: Arial, Helvetica, sans-serif;
+      }
+
+
+      .container {
+      height: 400px;
+      position: relative;
+
+      }
+
+      .center {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      }
+
+
+
+      .mainBackground {
+      position: absolute;
+      left: 50px;
+      top: 50px;
+      right: 50px;
+      bottom: 0px;
+      }
+
+      .smallGrayText {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10px;
+      color: gray;
+      }
+
+
+
+      .mediumGrayTest {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 13px;
+      color: gray;
+      }
+
+     .profileTextfield {
+        border:1px solid gray;
+        border-radius:5px;
+        background:transparent;
+        color:black;
+        width:98%;
+        height:30px;
+        top:0;
+        right:0;
+        }
+
+        .profileContainer {
+        position: absolute;
+        background: white;
+        width: 200px;
+        height: 400px;
+        top: 400px;
+        }
+
+        .cell {
+        background: white;
+        float: left;
+        width: 50%;
+        height: 1000px;
+        }
+
+
+
+.shadowPureEffect {
+    box-shadow: 0px 0px 16px 2px rgba(0,0,0,0.09), 0px 0px 16px 2px rgba(0,0,0,0.09);
+}
+
+.postCard {
+       cursor: pointer;
+       text-align: left;
+       padding: 20px;
+       border: 0px solid black;
+       border-radius: 25px;
+       width: 80%
+      }

@@ -1,147 +1,178 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta content="telephone=no" name="format-detection">
     <meta content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
     <link href="../static/css/login.css" rel="stylesheet" type="text/css" />
+    <link href="../static/css/userCenter.css" rel="stylesheet" type="text/css" />
+    <link href="../static/css/global.css" rel="stylesheet" type="text/css" />
     <title>HackInBlockChain-Login</title>
+    <script>
+
+        function editProfileButtonAction() {
+        document.getElementById("profileEditing").style.display = "block";
+        }
+
+    </script>
+
     <style>
 
-      h2 {
-          font-family: Arial, Helvetica, sans-serif;
-      }
-
-
-      p {
-      font-family: Arial, Helvetica, sans-serif;
-      }
-
-
-      .container {
-      height: 400px;
-      position: relative;
-
-      }
-
-      .center {
-      margin: 0;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      -ms-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
-      }
-
-      .postCard {
-       cursor: pointer;
-       text-align: left;
-       padding: 20px;
-       border: 0px solid black;
-       border-radius: 25px;
-       width: 80%
-      }
-
-      .userCenterBackground {
-      position: absolute;
-      left: 50px;
-      top: 50px;
-      right: 50px;
-      bottom: 0px;
-      }
-
-      .smallGrayText {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 10px;
-      color: gray;
-      }
-
-      .shadowPureEffect {
-        box-shadow: 0px 0px 16px 2px rgba(0,0,0,0.09), 0px 0px 16px 2px rgba(0,0,0,0.09);
-      }
-
+    .bioTextfield {
+    border:1px solid gray;
+    border-radius:5px;
+    background:transparent;
+    color:black;
+    width:98%;
+    height:100px;
+    top:0;
+    right:0;
+    }
     </style>
 </head>
-<div class="userCenterBackground">
-<div class="horizontalCell" id="personalInfo" style="background: white; float: left; width: 50%; height: 800px;">
-    <div>
-    </div>
+<div class="mainBackground">
+<div class="horizontalCell cell" id="personalInfo">
+
     <div class="container" style="top: 50px;">
-    <div class="center">
-        <img src="../static/images/avatar.png" style="width: 200px; height: 200px; border-radius: 50%; ">
-        <h2 style="text-align: center;">Ziming Liu</h2>
-        <button class="mainButton" onclick="signInBtnAction()" style="width: 200px;"><span class="mainButtonText"id="btnText">Edit profile</span></button>
-    </div>
-    </div>
-</div>
-<div class="horizontalCell" id="historyPosts" style="background: white; float: left; width: 50%; height: 800px;">
-
-    <h2>历史帖子</h2>
-    <div class="shadowPureEffect postCard">
-
-        <div style="width: 100%">
-            <div class="horizontalCell">
-            <img src="../static/images/avatar.png" style="width: 50px; height: 50px; border-radius: 50%;">
+        <div class="center">
+            <div id="profilePreview">
+                <img src="../static/images/avatar.png" style="width: 200px; height: 200px; border-radius: 50%; ">
+                <br><br>
+                <h2 style="text-align: center;">Ziming Liu</h2>
+                <h3 class = "mediumGrayTest" style="text-align: center;">liuzimingjay@vip.qq.com</h3>
+                <button class="mainButton" id="editProfileButton" onclick="editProfileButtonAction()" style="width: 200px;"><span class="mainButtonText"id="btnText">Edit profile</span></button>
             </div>
-            <div class="horizontalCell">
+
+            <div class="profileContainer" id="profileEditing" style="display: none">
+                <form id="signInForm" action="ConnServlet" method="post" style="position:relative; top: 0px; bottom: 0px; right: 0px; left: 0px;">
+                    <input id="forwardType" name="forwardType" value="login" style="display:none">
+                    <p>Name</p>
+                    <input class="profileTextfield" placeholder="Nickname" id="email" name="email" oninput="hideError()">
+                    <br><br>
+                    <p>Bio</p>
+                    <input class="bioTextfield"  type="password" id="password" name="password" oninput="hideError()">
+                    <p>Gender</p>
+                    <br><br>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<div class="horizontalCell cell" id="historyPosts" >
+
+    <br><br><br>
+    <h2>My Posts</h2>
+    <br><br>
+    <ul class="shadowPureEffect postCard">
+        <li class="media pb-3 pt-3 mb-3 border-bottom" th:each=帖子>
+            <a href="site/profile.html">
+                <img th:src=用户头像 class="mr-4 rounded-circle" alt="Avatar" style="width:50px;height:50px;">
+            </a>
+            <div class="media-body">
+                <h6 class="mt-0 mb-3">
+                    <a th:href=帖子ID th:utext=帖子标题>Bitcoin Mining Firm Marathon Digital Posts 91% Growth in Q3 !</a>
+                </h6>
+
+                <p class="mt-0 mb-3 ">
+                    <a th:href=帖子ID th:utext=帖子详情>以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了</a>
+                </p>
+                <div class="text-muted font-size-12">
+                    <u class="mr-3" th:utext=用户名username>Dongrui</u> Posted on <b th:text=发布时间>2021-10-05 19:35:28</b>
+                    <ul class="d-inline float-right">
+                        <li class="d-inline ml-2">Like 66</li>
+                        <li class="d-inline ml-2">|</li>
+                        <li class="d-inline ml-2">Comments <span th:text="${map.post.commentCount}">15</span></li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <br><br>
+    <ul class="shadowPureEffect postCard">
+        <li class="media pb-3 pt-3 mb-3 border-bottom" th:each=帖子>
+            <a href="site/profile.html">
+                <img th:src=用户头像 class="mr-4 rounded-circle" alt="Avatar" style="width:50px;height:50px;">
+            </a>
+            <div class="media-body">
+                <h6 class="mt-0 mb-3">
+                    <a th:href=帖子ID th:utext=帖子标题>Bitcoin Mining Firm Marathon Digital Posts 91% Growth in Q3 !</a>
+                </h6>
+
+                <p class="mt-0 mb-3 ">
+                    <a th:href=帖子ID th:utext=帖子详情>以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了</a>
+                </p>
+                <div class="text-muted font-size-12">
+                    <u class="mr-3" th:utext=用户名username>Dongrui</u> Posted on <b th:text=发布时间>2021-10-05 19:35:28</b>
+                    <ul class="d-inline float-right">
+                        <li class="d-inline ml-2">Like 66</li>
+                        <li class="d-inline ml-2">|</li>
+                        <li class="d-inline ml-2">Comments <span th:text="${map.post.commentCount}">15</span></li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+
+
+</div>
+</div>
+
+<footer class="sticky-footer" style="height: 200px;">
+    <div class="container">
+        <div class="row">
+            <!-- 二维码 -->
+            <div class="col-4 qrcode">
+                <img src="https://uploadfiles.nowcoder.com/app/app_download.png" class="img-thumbnail" style="width:136px;" />
+            </div>
+            <!-- Company information -->
+            <div class="col-8 detail-info">
+                <div class="row">
+                    <div class="col">
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="#">About Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="#">Join Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="#">FAQ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="#">Help</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="#">Contact Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="#">Announcements</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <ul class="nav btn-group-vertical company-info">
+                            <li class="nav-item text-white-50">
+                                Contact details : 61-416928766(phone)&nbsp;&nbsp;&nbsp;&nbsp;2631096824@qq.com
+                            </li>
+                            <li class="nav-item text-white-50">
+                                ELEC5619Group39©2021 All rights reserved
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <h3>11月暴涨？你不能错过的以太坊咨询</h3>
-        <p>以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了</p>
-        <p class="smallGrayText">2021年10月1日</p>
     </div>
-    <br>
-    <br>
-
-    <div class="shadowPureEffect postCard">
-        <div style="width: 100%">
-            <div class="horizontalCell">
-                <img src="../static/images/avatar.png" style="width: 50px; height: 50px; border-radius: 50%;">
-            </div>
-            <div class="horizontalCell">
-            </div>
-        </div>
-
-        <h3>如何挖矿</h3>
-        <p>狗狗币又涨了狗狗币又涨了狗狗币又涨了狗狗币又涨了狗狗币又涨了狗狗币又涨了了狗狗币又涨了了狗狗币又涨了了狗狗币又涨了了狗狗币又涨了了狗狗币又涨了了狗狗币又涨了了狗狗币又涨了</p>
-        <p class="smallGrayText">2021年10月2日</p>
-    </div>
-
-
-
-</div>
-</div>
-
-<!--<div id="card" class="card">-->
-<!--    <div id="frontBox" class="shadowEffect" style="top:300px; width: 350px; height: 420px;">-->
-<!--        <div id="frontBoxContent" class="cardText">-->
-<!--            <h1>Edit profile</h1>-->
-<!--            <p id="tipText"></p>-->
-<!--            <br>-->
-<!--            <form id="signInForm" action="ConnServlet" method="post" style="position:relative; top:-18px;">-->
-<!--                <p>Nickname</p>-->
-<!--                <input class="textField" type="password" id="username" name="password" oninput="hideError()">-->
-<!--                <p>Email address</p>-->
-<!--                <input id="forwardType" name="forwardType" value="login" style="display:none">-->
-<!--                <input class="textField" id="email" name="email" oninput="hideError()">-->
-<!--                <p id="loginEmailEmpty" style="display:none; color:red;">Plase enter your Email address</p>-->
-<!--                <p>Password</p>-->
-<!--                <input class="textField" type="password" id="password" name="password" oninput="hideError()">-->
-
-
-<!--                <p id="loginPasswordEmpty" style="display:none; color:red;">Plase enter your password</p>-->
-<!--                <p id="loginPasswordWrong" style="display:none; color:red;">Please fill in all the required options</p>-->
-<!--            </form>-->
-
-<!--            <button class="mainButton" onclick="signInBtnAction()"><span id="btnText"class="mainButtonText">Sign up</span></button>-->
-
-<!--            <p id="registerText" style="position: relative; top: 30px; text-align: center;" >Already have an account? <span style="cursor: pointer; color: #c5464a;" onclick="goSignUpBtnAction()" id="goSignUpBtn"><b class="accentColorText">Sign in</b></span></p>-->
-<!--            <p id="forgotText"style="position: relative; top: 30px; text-align: center; cursor: pointer; display: none;" onclick="forgotPasswordAction()">Forget your password?</p>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+</footer>
 
 </body>
 </html>
