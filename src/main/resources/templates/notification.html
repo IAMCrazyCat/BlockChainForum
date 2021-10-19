@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+    <link href="../static/css/login.css" rel="stylesheet" type="text/css" />
+    <link href="../static/css/userCenter.css" rel="stylesheet" type="text/css" />
+    <link href="../static/css/global.css" rel="stylesheet" type="text/css" />
+    <title>notification</title>
+</head>
+<body>
+<div class="notification">
+    <div style="width: 50%; margin: auto" class="main">
+        <div class="shadowPureEffect postCard">
+            <ul class="list">
+                <!-- comment -->
+                <li class="media pb-3 pt-3 mb-3 border-bottom position-relative" th:each=评论通知 style="font-size: 20px;">
+                    <i>💬</i>
+                    <div class="media-body">
+                        <span class="float-right text-muted font-size-12" th:text="${#dates.format(commentNotice.message.createTime,'yyyy-MM-dd')}">2021-11-22 12:12:22</span>
+                        <div>
+                                <i th:utext=评论者名字>Gilbert</i>
+                                <span><i class="text-muted">comments on</i></span>
+                                <b th:text="帖子名字">Post 1. </b>
+                        </div>
+                    </div>
+                </li>
+                <!--like-->
+                <li class="media pb-3 pt-3 mb-3 border-bottom position-relative" th:each=点赞通知 style="font-size: 20px;">
+                    <i>👍</i>
+                    <div class="media-body">
+                        <span class="float-right text-muted font-size-12" th:text="${#dates.format(likeNotice.message.createTime,'yyyy-MM-dd HH:mm:ss')}">2021-03-22 16:14:21</span>
+                        <div>
+                            <i th:utext="用户名">Michael</i>
+                            <span><i class="text-muted">Likes</i></span>
+                            <b th:text="帖子名字">Post 1. </b>
+                        </div>
+                    </div>
+                </li>
+                <!--follow-->
+                <li class="media pb-3 pt-3 mb-3 border-bottom position-relative" th:each=关注通知 style="font-size: 20px;">
+                    <i>❤️</i>
+                    <div class="media-body">
+                        <span class="float-right text-muted font-size-12" th:text="${#dates.format(followNotice.message.createTime,'yyyy-MM-dd HH:mm:ss')}">2021-01-45 13:12:34</span>
+                        <div>
+                            <i th:utext="用户名">Richard</i><span><i class="text-muted"> Starts follow you.</i></span>
+
+                        </div>
+                    </div>
+                </li>
+
+
+
+
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+</body></html>
