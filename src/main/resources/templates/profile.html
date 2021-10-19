@@ -2,190 +2,76 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" href="https://static.nowcoder.com/images/logo_87_87.png"/>
+    <meta content="telephone=no" name="format-detection">
+    <meta content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{/css/global.css}" />
-    <title>profile</title>
+    <link href="../static/css/login.css" rel="stylesheet" type="text/css" />
+    <link href="../static/css/userCenter.css" rel="stylesheet" type="text/css" />
+    <link href="../static/css/global.css" rel="stylesheet" type="text/css" />
+    <title>UserProfile</title>
+    <script>
+        function follow() {
+            const STATUS_TYPE = {'1': '+ follow', '0': 'followed'};
+            const focusBtn = document.getElementById('focusBtn');
+            focusBtn.addEventListener('click', () =>
+            {
+                if (focusBtn.innerHTML == STATUS_TYPE[1])
+                    {
+                        focusBtn.classList.add('focused')
+                        focusBtn.innerHTML = 'followed'
+                        alert('followed successful')
+                    } else {
+                        focusBtn.classList.remove('focused')
+                        focusBtn.innerHTML = '+ follow'
+                    }
+            })
+        }
+
+    </script>
 </head>
 <body>
-<div class="nk-container" >
-    <!-- header -->
-    <header class="bg-dark sticky-top" th:replace="index::header">
-        <div class="container">
-            <!-- nav bar-->
-            <nav class="navbar navbar-expand-lg navbar-dark">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item ml-3 btn-group-vertical"><a class="nav-link" href="">Main Page</a></li>
-                        <li class="nav-item ml-3 btn-group-vertical"><a class="nav-link position-relative" href="">Message<span class="badge badge-danger">12</span></a></li>
-                        <li class="nav-item ml-3 btn-group-vertical"><a class="nav-link" href="">Register</a></li>
-                        <li class="nav-item ml-3 btn-group-vertical"><a class="nav-link" href="login.html">Login</a></li>
-                        <li class="nav-item ml-3 btn-group-vertical dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="头像" class="rounded-circle" style="width:30px;"></a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-center" href="usercenter.html">User Center</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-center" href="">Log Out</a>
-                            </div>
-                        </li>
-                    </ul>
-                    <!-- Search -->
-                    <form class="form-inline my-2 my-lg-0" action="">
-                        <input class="form-control mr-sm-2" type="search" aria-label="Search">
-                        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">🔎</button>
-                    </form>
-                </div>
-            </nav>
-        </div>
-    </header>
 
-    <!-- 内容 -->
     <div class="main">
         <div class="container">
-            <!-- 个人信息 -->
-            <div class="media mt-5">
-                <img th:src="${user.headerUrl}" class="align-self-start mr-4 rounded-circle" alt="用户头像" style="width:50px;">
-                <div class="media-body">
-                    <h5 class="mt-0 text-warning">
-                        <span th:utext="${user.username}">Gilbert</span><br>
-                        <span th:utext="${user.signature}">hahahahahah</span>
-                        <input type="hidden" id="entityId" th:value="${user.id}">
-                        <button type="button" th:class="|btn ${hasFollowed? 'btn-secondary':'btn-info'} btn-sm float-right mr-5 follow-btn|"
-                                th:text="${hasFollowed? '已关注':'关注TA'}" th:if="${loginUser!=null && loginUser.id!=user.id}" >Follow</button>
-                    </h5>
-                    <div class="text-muted mt-3">
-                        <span>注册于 <i class="text-muted" th:text="${#dates.format(user.createTime,'yyyy-MM-dd HH:mm:ss')}">2015-06-12 15:20:12</i></span>
-                    </div>
-                    <div class="text-muted mt-3 mb-5">
-                        <span>Followed <a class="text-primary" th:href="@{|/user/followees/${user.id}|}" th:text="${followeeCount}">5</a></span>
-                        <span class="ml-4">Follower <a class="text-primary" th:href="@{|/user/followers/${user.id}|}" th:text="${followerCount}">123</a></span>
-                        <span class="ml-4"><i class="text-danger" th:text="${likeCount}">87</i>👍🏻</span>
-                    </div>
+            <div class="user-profile">
+                <img class="mr-4 rounded-circle" alt="用户头像" style="width:300px;">
+                <h4><span>Gilbert<input type="hidden" id="entityId" th:value="${user.id}">
+                    <button type="button" style="border-radius:40px" onclick="follow()" >Follow</button></span>
+                </h4>
+                <span>THIS IS A SIGNATURE</span>
+                <div class="text-muted mt-3">
+                    <span>Joined <i class="text-muted">2015-06-12</i></span><br><br>
+                    <span><a class="text-primary">5</a> Following</span>
+                    <span><a class="text-primary">123</a> Followers</span>
+                    <span><a class="text-danger">87</a> Like</span><br><br>
                 </div>
             </div>
-            <div class="position-relative" >
+
+            <div class="label" >
                 <ul class="nav nav-tabs">
-                    <li class="nav-item"><a class="nav-link active"><b class="square"></b >发布的贴子(<span th:text="${discussPostCounts}">93</span>)</a></li>
+                    <li class="nav-item"><a class="nav-link active">发布的贴子[<span th:text="${PostCounts}">93</span>]</a></li>
                 </ul>
             </div>
-            <div class="mt-4">
-                <ul  class="list-unstyled mt-4 pl-3 pr-3" >
-                    <li class="border-bottom pb-3 mt-4" th:each="post:${posts}">
-                        <div class="font-size-16 text-info">
-                            <a th:href="@{|/discuss/detail/${post.id}|}" class="text-info" th:utext="${post.title}">这是个帖子标题</a>
-                        </div>
-                        <div class="mt-1 font-size-14" th:utext="${post.content}">
-                            这是个帖子摘要哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
-                        </div>
-                        <div class="text-right font-size-12 text-muted">
-                            👍🏻 <i class="mr-3" th:text="${post.commentCount}">11</i> posted on <b th:text="${#dates.format(post.createTime,'yyyy-MM-dd HH:mm:ss')}">2021-01-11</b>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="mt-4">
-                <ul  class="list-unstyled mt-4 pl-3 pr-3" >
-                    <li class="border-bottom pb-3 mt-4" th:each="post:${posts}">
-                        <div class="font-size-16 text-info">
-                            <a th:href="@{|/discuss/detail/${post.id}|}" class="text-info" th:utext="${post.title}">这是个帖子标题</a>
-                        </div>
-                        <div class="mt-1 font-size-14" th:utext="${post.content}">
-                            这是个帖子摘要哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
-                        </div>
-                        <div class="text-right font-size-12 text-muted">
-                            👍🏻 <i class="mr-3" th:text="${post.commentCount}">11</i> posted on <b th:text="${#dates.format(post.createTime,'yyyy-MM-dd HH:mm:ss')}">2021-01-11</b>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="mt-4">
-                <ul  class="list-unstyled mt-4 pl-3 pr-3" >
-                    <li class="border-bottom pb-3 mt-4" th:each="post:${posts}">
-                        <div class="font-size-16 text-info">
-                            <a th:href="@{|/discuss/detail/${post.id}|}" class="text-info" th:utext="${post.title}">这是个帖子标题</a>
-                        </div>
-                        <div class="mt-1 font-size-14" th:utext="${post.content}">
-                            这是个帖子摘要哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
-                        </div>
-                        <div class="text-right font-size-12 text-muted">
-                            👍🏻 <i class="mr-3" th:text="${post.commentCount}">11</i> posted on <b th:text="${#dates.format(post.createTime,'yyyy-MM-dd HH:mm:ss')}">2021-01-11</b>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="mt-4">
-                <ul  class="list-unstyled mt-4 pl-3 pr-3" >
-                    <li class="border-bottom pb-3 mt-4" th:each="post:${posts}">
-                        <div class="font-size-16 text-info">
-                            <a th:href="@{|/discuss/detail/${post.id}|}" class="text-info" th:utext="${post.title}">这是个帖子标题</a>
-                        </div>
-                        <div class="mt-1 font-size-14" th:utext="${post.content}">
-                            这是个帖子摘要哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
-                        </div>
-                        <div class="text-right font-size-12 text-muted">
-                            👍🏻 <i class="mr-3" th:text="${post.commentCount}">11</i> posted on <b th:text="${#dates.format(post.createTime,'yyyy-MM-dd HH:mm:ss')}">2021-01-11</b>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="mt-4">
-                <ul  class="list-unstyled mt-4 pl-3 pr-3" >
-                    <li class="border-bottom pb-3 mt-4" th:each="post:${posts}">
-                        <div class="font-size-16 text-info">
-                            <a th:href="@{|/discuss/detail/${post.id}|}" class="text-info" th:utext="${post.title}">这是个帖子标题</a>
-                        </div>
-                        <div class="mt-1 font-size-14" th:utext="${post.content}">
-                            这是个帖子摘要哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
-                        </div>
-                        <div class="text-right font-size-12 text-muted">
-                            👍🏻 <i class="mr-3" th:text="${post.commentCount}">11</i> posted on <b th:text="${#dates.format(post.createTime,'yyyy-MM-dd HH:mm:ss')}">2021-01-11</b>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="mt-4">
-                <ul  class="list-unstyled mt-4 pl-3 pr-3" >
-                    <li class="border-bottom pb-3 mt-4" th:each="post:${posts}">
-                        <div class="font-size-16 text-info">
-                            <a th:href="@{|/discuss/detail/${post.id}|}" class="text-info" th:utext="${post.title}">这是个帖子标题</a>
-                        </div>
-                        <div class="mt-1 font-size-14" th:utext="${post.content}">
-                            这是个帖子摘要哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
-                        </div>
-                        <div class="text-right font-size-12 text-muted">
-                            👍🏻 <i class="mr-3" th:text="${post.commentCount}">11</i> posted on <b th:text="${#dates.format(post.createTime,'yyyy-MM-dd HH:mm:ss')}">2021-01-11</b>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="mt-4">
-                <ul  class="list-unstyled mt-4 pl-3 pr-3" >
-                    <li class="border-bottom pb-3 mt-4" th:each="post:${posts}">
-                        <div class="font-size-16 text-info">
-                            <a th:href="@{|/discuss/detail/${post.id}|}" class="text-info" th:utext="${post.title}">这是个帖子标题</a>
-                        </div>
-                        <div class="mt-1 font-size-14" th:utext="${post.content}">
-                            这是个帖子摘要哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
-                        </div>
-                        <div class="text-right font-size-12 text-muted">
-                            👍🏻 <i class="mr-3" th:text="${post.commentCount}">11</i> posted on <b th:text="${#dates.format(post.createTime,'yyyy-MM-dd')}">2021-01-11</b>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="mt-4">
-                <ul  class="list-unstyled mt-4 pl-3 pr-3" >
-                    <li class="border-bottom pb-3 mt-4" th:each="post:${posts}">
-                        <div class="font-size-16 text-info">
-                            <a th:href="@{|/discuss/detail/${post.id}|}" class="text-info" th:utext="${post.title}">这是个帖子标题</a>
-                        </div>
-                        <div class="mt-1 font-size-14" th:utext="${post.content}">
-                            这是个帖子摘要哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
-                        </div>
-                        <div class="text-right font-size-12 text-muted">
-                            👍🏻 <i class="mr-3" th:text="${post.commentCount}">11</i> posted on <b th:text="${#dates.format(post.createTime,'yyyy-MM-dd')}">2021-01-11</b>
+            <div class="posts">
+                <ul class="shadowPureEffect postCard">
+                    <li class="media pb-3 pt-3 mb-3 border-bottom" th:each=帖子>
+                        <div class="media-body">
+                            <h6 class="mt-0 mb-3">
+                                <a th:href=帖子ID th:utext=帖子标题>Bitcoin Mining Firm Marathon Digital Posts 91% Growth in Q3 !</a>
+                            </h6>
+
+                            <p class="mt-0 mb-3 ">
+                                <a th:href=帖子ID th:utext=帖子详情>以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了</a>
+                            </p>
+                            <div class="text-muted font-size-12">
+                                <u class="mr-3" th:utext=用户名username>Dongrui</u> Posted on <b th:text=发布时间>2021-10-05 19:35:28</b>
+                                <ul class="d-inline float-right">
+                                    <li class="d-inline ml-2">Like 66</li>
+                                    <li class="d-inline ml-2">|</li>
+                                    <li class="d-inline ml-2">Comments <span th:text="${map.post.commentCount}">15</span></li>
+                                </ul>
+                            </div>
                         </div>
                     </li>
                 </ul>
@@ -193,36 +79,6 @@
         </div>
     </div>
 
-    <!-- footer -->
-    <footer class="bg-dark">
-        <div class="container">
-            <div class="row">
-                <!-- logo -->
-                <div class="col-4 qrcode">
-                    <img src="图标" class="img-thumbnail" style="width:136px;">
-                </div>
-                <div class="col-8 detail-info">
-                    <div class="row">
-                        <div class="col">
-                            <ul class="nav">
-                                <li class="nav-item"><a class="nav-link text-light" href="#">Terms</a></li>
-                                <li class="nav-item"><a class="nav-link text-light" href="#">Privacy</a></li>
-                                <li class="nav-item"><a class="nav-link text-light" href="#">Contact Us</a></li>
-                                <li class="nav-item"><a class="nav-link text-light" href="#">© 2021 Group 39</a></li>
-                            </ul>
-                        </div>
-                    </div>
 
-                </div>
-            </div>
-        </div>
-    </footer>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
-<script th:src="@{/js/global.js}"></script>
-<script th:src="@{/js/profile.js}"></script>
 </body>
 </html>
