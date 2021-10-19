@@ -14,6 +14,12 @@
 
         function editProfileButtonAction() {
         document.getElementById("profileEditing").style.display = "block";
+        document.getElementById("editProfileButton").style.display = "none";
+        document.getElementById("avatarEditButton").style.display = "block";
+        }
+
+        function editAvatarButtonAction() {
+        document.getElementById("fileDialog").click();
         }
 
     </script>
@@ -30,6 +36,15 @@
     top:0;
     right:0;
     }
+
+    .editButton {
+    position: absolute;
+    text-align: center;
+    width: 60px;
+    height: 28px;
+    right: 10px;
+    top: 170px;
+    }
     </style>
 </head>
 <div class="mainBackground">
@@ -39,6 +54,8 @@
         <div class="center">
             <div id="profilePreview">
                 <img src="../static/images/avatar.png" style="width: 200px; height: 200px; border-radius: 50%; ">
+                <button class="editButton" id="avatarEditButton" onclick="editAvatarButtonAction()" style="display: none;" >Edit</button>
+                <input type="file" id="fileDialog" style="display: none"/>
                 <br><br>
                 <h2 style="text-align: center;">Ziming Liu</h2>
                 <h3 class = "mediumGrayTest" style="text-align: center;">liuzimingjay@vip.qq.com</h3>
@@ -52,7 +69,7 @@
                     <input class="profileTextfield" placeholder="Nickname" id="email" name="email" oninput="hideError()">
                     <br><br>
                     <p>Bio</p>
-                    <input class="bioTextfield"  type="password" id="password" name="password" oninput="hideError()">
+                    <textarea class="bioTextfield" id="password" name="password" oninput="hideError()"></textarea>
                     <p>Gender</p>
                     <br><br>
                 </form>
@@ -124,55 +141,55 @@
 </div>
 </div>
 
-<footer class="sticky-footer" style="height: 200px;">
-    <div class="container">
-        <div class="row">
-            <!-- 二维码 -->
-            <div class="col-4 qrcode">
-                <img src="https://uploadfiles.nowcoder.com/app/app_download.png" class="img-thumbnail" style="width:136px;" />
-            </div>
-            <!-- Company information -->
-            <div class="col-8 detail-info">
-                <div class="row">
-                    <div class="col">
-                        <ul class="nav">
-                            <li class="nav-item">
-                                <a class="nav-link text-light" href="#">About Us</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-light" href="#">Join Us</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-light" href="#">FAQ</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-light" href="#">Help</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-light" href="#">Contact Us</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-light" href="#">Announcements</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <ul class="nav btn-group-vertical company-info">
-                            <li class="nav-item text-white-50">
-                                Contact details : 61-416928766(phone)&nbsp;&nbsp;&nbsp;&nbsp;2631096824@qq.com
-                            </li>
-                            <li class="nav-item text-white-50">
-                                ELEC5619Group39©2021 All rights reserved
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+<!--<footer class="sticky-footer" style="height: 200px;">-->
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            &lt;!&ndash; 二维码 &ndash;&gt;-->
+<!--            <div class="col-4 qrcode">-->
+<!--                <img src="https://uploadfiles.nowcoder.com/app/app_download.png" class="img-thumbnail" style="width:136px;" />-->
+<!--            </div>-->
+<!--            &lt;!&ndash; Company information &ndash;&gt;-->
+<!--            <div class="col-8 detail-info">-->
+<!--                <div class="row">-->
+<!--                    <div class="col">-->
+<!--                        <ul class="nav">-->
+<!--                            <li class="nav-item">-->
+<!--                                <a class="nav-link text-light" href="#">About Us</a>-->
+<!--                            </li>-->
+<!--                            <li class="nav-item">-->
+<!--                                <a class="nav-link text-light" href="#">Join Us</a>-->
+<!--                            </li>-->
+<!--                            <li class="nav-item">-->
+<!--                                <a class="nav-link text-light" href="#">FAQ</a>-->
+<!--                            </li>-->
+<!--                            <li class="nav-item">-->
+<!--                                <a class="nav-link text-light" href="#">Help</a>-->
+<!--                            </li>-->
+<!--                            <li class="nav-item">-->
+<!--                                <a class="nav-link text-light" href="#">Contact Us</a>-->
+<!--                            </li>-->
+<!--                            <li class="nav-item">-->
+<!--                                <a class="nav-link text-light" href="#">Announcements</a>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row">-->
+<!--                    <div class="col">-->
+<!--                        <ul class="nav btn-group-vertical company-info">-->
+<!--                            <li class="nav-item text-white-50">-->
+<!--                                Contact details : 61-416928766(phone)&nbsp;&nbsp;&nbsp;&nbsp;2631096824@qq.com-->
+<!--                            </li>-->
+<!--                            <li class="nav-item text-white-50">-->
+<!--                                ELEC5619Group39©2021 All rights reserved-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</footer>-->
 
 </body>
 </html>
