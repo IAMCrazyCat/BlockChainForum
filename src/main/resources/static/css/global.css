@@ -3,10 +3,13 @@ html {
 }
 
 body {
-	background: #eee;
-	font-family: arial, STHeiti, 'Microsoft YaHei', \5b8b\4f53;
-	font-size: 14px;
-	height: 100%;
+	background: url('http://123.56.59.240:8080/images/loginBackground.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	/*background: #eee;*/
+	/*font-family: arial, STHeiti, 'Microsoft YaHei', \5b8b\4f53;*/
+	/*font-size: 14px;*/
+	/*height: 100%;*/
 }
 
 .nk-container {

@@ -28,10 +28,10 @@ import java.util.Map;
 @Controller
 public class LoginController implements CommunityConstant {
     @RequestMapping(path="/register", method = RequestMethod.GET)
-    public String getRegisterPage() {return "register_yrj";}
+    public String getRegisterPage() {return "/site/register_yrj";}
 
     @RequestMapping(path="/login", method = RequestMethod.GET)
-    public String getLoginPage() {return "login_yrj";}
+    public String getLoginPage() {return "/site/login";}
 
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
     @Autowired
@@ -46,12 +46,12 @@ public class LoginController implements CommunityConstant {
         if(map == null || map.isEmpty()) {
             model.addAttribute("msg", "Successfully send an email to you");
             model.addAttribute("target", "/index");
-            return "operate-result_yrj";
+            return "/site/operate-result_yrj";
         }else{
             model.addAttribute("userNameMsg", map.get("userNameMsg"));
             model.addAttribute("passwordMsg", map.get("passwordMsg"));
             model.addAttribute("emailMsg", map.get("emailMsg"));
-            return "register_yrj";
+            return "/site/register_yrj";
         }
     }
 
@@ -89,11 +89,11 @@ public class LoginController implements CommunityConstant {
     }
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public String login(String username, String password, String code, boolean rememberMe, Model model, HttpSession session, HttpServletResponse response) {
-        String kaptcha = (String) session.getAttribute("kaptcha");
-        if(StringUtils.isEmpty(kaptcha) || StringUtils.isEmpty(code) || !kaptcha.equalsIgnoreCase(code)) {
-            model.addAttribute("codeMsg", "Verify code is not correct");
-            return "login_yrj";
-        }
+//        String kaptcha = (String) session.getAttribute("kaptcha");
+//        if(StringUtils.isEmpty(kaptcha) || StringUtils.isEmpty(code) || !kaptcha.equalsIgnoreCase(code)) {
+//            model.addAttribute("codeMsg", "Verify code is not correct");
+//            return "/site/login";
+//        }
 
         int expiredSeconds = rememberMe ? REMEMBER_EXPIRED_SECONDS : DEFAULT_EXPIRED_SECONDS;
         Map<String, Object> map = userService.login(username, password, expiredSeconds);
@@ -106,7 +106,7 @@ public class LoginController implements CommunityConstant {
         } else {
             model.addAttribute("usernameMsg", map.get("usernameMsg"));
             model.addAttribute("passwordMsg",map.get("passwordMsg"));
-            return "login_yrj";
+            return "/site/login";
         }
     }
 

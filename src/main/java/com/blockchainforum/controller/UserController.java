@@ -2,9 +2,13 @@ package com.blockchainforum.controller;
 
 import com.blockchainforum.annotation.LoginRequired;
 import com.blockchainforum.entity.ForumUser;
+import com.blockchainforum.entity.Page;
+import com.blockchainforum.entity.Post;
+import com.blockchainforum.service.PostService;
 import com.blockchainforum.service.UserService;
 import com.blockchainforum.util.CommunityUtil;
 import com.blockchainforum.util.HostHolder;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +26,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/user")
@@ -42,18 +50,44 @@ public class UserController {
 
     @Autowired
     private HostHolder hostHolder;
+
+    @Autowired
+    private PostService postService;
     @LoginRequired
     @RequestMapping(path = "/setting", method = RequestMethod.GET)
     public String getSettingPage() {
-        return "setting_yrj";
+        return "/site/setting_yrj";
     }
 
+    @RequestMapping(path = "/profile/{uid}", method = RequestMethod.GET)
+    public String getUserCenterPage(@PathVariable("uid") int uid, Model model, Page page) {
+        page.setRows(postService.findPostRows(uid));
+        page.setPath("/index");
+        List<Post> list = postService.findPosts(uid , page.getOffset(), page.getLimit());
+        String avatar = userService.findUserById(uid).getAvatar();
+        String username = userService.findUserById(uid).getUname();
+
+        List<Map<String, Object>> posts = new ArrayList();
+        if(list != null){
+            for(Post post : list){
+                Map<String, Object> map = new HashMap<>();
+                map.put("post",post);
+                ForumUser forumUser = userService.findUserById(post.getUid());
+                map.put("forumUser", forumUser);
+                posts.add(map);
+            }
+        }
+        model.addAttribute("posts", posts);
+        model.addAttribute("avatar", avatar);
+        model.addAttribute("username", username);
+        return "/site/profile";
+    }
     @LoginRequired
     @RequestMapping(path = "/upload", method = RequestMethod.POST)
     public String uploadAvatar(MultipartFile avatarImage, Model model) {
         if(avatarImage == null) {
             model.addAttribute("error", "No file uploaded");
-            return "setting_yrj";
+            return "/site/setting_yrj";
         }
 
         String fileName = avatarImage.getOriginalFilename();
@@ -61,7 +95,7 @@ public class UserController {
         String suffix = fileName.substring(fileName.lastIndexOf("."));
         if(StringUtils.isEmpty(suffix)) {
             model.addAttribute("error", "Incorrect Format!");
-            return "setting_yrj";
+            return "/site/setting_yrj";
         }
 
         fileName = CommunityUtil.generateUUID() + suffix;
@@ -100,6 +134,24 @@ public class UserController {
             }
         } catch (IOException e) {
             logger.error("fail to load image" + e.getMessage());
+        }
+    }
+
+    @RequestMapping(path = "/changePassword", method = RequestMethod.POST)
+    public String changeUserPassword(String oldPassword, String newPassword, String confirmPassword, Model model){
+
+        ForumUser forumUser = hostHolder.getUser();
+        Map<String, Object> map = userService.modifyPassword(forumUser, newPassword, oldPassword, confirmPassword);
+        if(map.containsKey("success")){
+            System.out.println("modifyPassword");
+            System.out.println(CommunityUtil.md5(newPassword + forumUser.getSalt()));
+            userService.updatePassword(forumUser.getUid(), CommunityUtil.md5(newPassword + forumUser.getSalt()));
+            System.out.println(userService.findUserById(forumUser.getUid()).getPwd());
+            return "/site/setting_yrj";
+        }else{
+            model.addAttribute("confirmMsg", map.get("confirmMsg"));
+            model.addAttribute("verifyMsg", map.get("verifyMsg"));
+            return "/site/setting_yrj";
         }
     }
 }

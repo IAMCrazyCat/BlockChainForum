@@ -130,10 +130,10 @@ public class UserService implements CommunityConstant {
             map.put("usernameMsg", "This account has not been activated");
             return map;
         }
-        System.out.println("login"+ password);
-        System.out.println("login" + forumUser.getSalt());
+//        System.out.println("login"+ password);
+//        System.out.println("login" + forumUser.getSalt());
         password = CommunityUtil.md5(password + forumUser.getSalt());
-        System.out.println("login"+ password);
+//        System.out.println("login"+ password);
         if(! forumUser.getPwd().equals(password)) {
             map.put("passwordMsg", "Password is not correct");
             return map;
@@ -153,11 +153,35 @@ public class UserService implements CommunityConstant {
         loginTicketMapper.updateStatus(ticket, 1);
     }
 
+    public  Map<String, Object> modifyPassword(ForumUser forumUser, String newPassword, String oldPassword, String confirmPassword) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        String old = forumUser.getPwd();
+
+        if(!confirmPassword.equals(newPassword)) {
+            System.out.println("different input");
+            map.put("confirmMsg", "different input");
+        }
+        else if(forumUser.getPwd().equals(CommunityUtil.md5(oldPassword + forumUser.getSalt()))) {
+            map.put("success", CommunityUtil.md5(newPassword + forumUser.getSalt()));
+            System.out.println("success");
+        }
+        else {
+            map.put("verifyMsg", "incorrect old password");
+            System.out.println("incorrect old password");
+        }
+
+        return map;
+    }
+
     public LoginTicket findLoginTicket(String ticket) {
         return loginTicketMapper.selectByTicket(ticket);
     }
 
     public int updateAvatar(int uid, String avatarURL){
         return userMapper.updateUserAvatar(uid, avatarURL);
+    }
+
+    public int updatePassword(int uid, String newPassword) {
+        return userMapper.updateUserPwd(uid, newPassword);
     }
 }
