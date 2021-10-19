@@ -117,7 +117,7 @@
             </div>
 
             <!-- Post List -->
-            <ul class="list-unstyled">
+            <ul class="shadowPureEffect postCard">
                 <li class="media pb-3 pt-3 mb-3 border-bottom" th:each=帖子>
                     <a href="site/profile.html">
                         <img th:src=用户头像 class="mr-4 rounded-circle" alt="Avatar" style="width:50px;height:50px;">
@@ -125,8 +125,6 @@
                     <div class="media-body">
                         <h6 class="mt-0 mb-3">
                             <a th:href=帖子ID th:utext=帖子标题>Bitcoin Mining Firm Marathon Digital Posts 91% Growth in Q3 !</a>
-                            <span class="badge badge-secondary bg-primary" th:if=置顶帖>Top</span>
-                            <span class="badge badge-secondary bg-danger" th:if=热门帖or精华帖>Hot</span>
                         </h6>
                         <div class="text-muted font-size-12">
                             <u class="mr-3" th:utext=用户名username>Dongrui</u> Posted on <b th:text=发布时间>2021-10-05 19:35:28</b>
