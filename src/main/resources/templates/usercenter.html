@@ -22,6 +22,9 @@
         document.getElementById("fileDialog").click();
         }
 
+        function loadMoreButtonAction() {
+        }
+
     </script>
 
     <style>
@@ -45,6 +48,18 @@
     right: 10px;
     top: 170px;
     }
+
+    .loadMoreButton {
+    position:relative;
+    background:white;
+    border:0.5px solid black;
+    border-radius:5px 5px 5px 5px;
+    border-color: black;
+    color: #3d81db;
+    top:15px;
+    right:0px;
+    cursor:pointer
+    }
     </style>
 </head>
 <div class="mainBackground">
@@ -55,7 +70,7 @@
             <div id="profilePreview">
                 <img src="../static/images/avatar.png" style="width: 200px; height: 200px; border-radius: 50%; ">
                 <button class="editButton" id="avatarEditButton" onclick="editAvatarButtonAction()" style="display: none;" >Edit</button>
-                <input type="file" id="fileDialog" style="display: none"/>
+
                 <br><br>
                 <h2 style="text-align: center;">Ziming Liu</h2>
                 <h3 class = "mediumGrayTest" style="text-align: center;">liuzimingjay@vip.qq.com</h3>
@@ -64,13 +79,14 @@
 
             <div class="profileContainer" id="profileEditing" style="display: none">
                 <form id="signInForm" action="ConnServlet" method="post" style="position:relative; top: 0px; bottom: 0px; right: 0px; left: 0px;">
+                    <input type="file" id="fileDialog" style="display: none"/>
                     <input id="forwardType" name="forwardType" value="login" style="display:none">
                     <p>Name</p>
                     <input class="profileTextfield" placeholder="Nickname" id="email" name="email" oninput="hideError()">
                     <br><br>
                     <p>Bio</p>
                     <textarea class="bioTextfield" id="password" name="password" oninput="hideError()"></textarea>
-                    <p>Gender</p>
+
                     <br><br>
                 </form>
             </div>
@@ -85,21 +101,22 @@
     <br><br><br>
     <h2>My Posts</h2>
     <br><br>
+
     <ul class="shadowPureEffect postCard">
-        <li class="media pb-3 pt-3 mb-3 border-bottom" th:each=帖子>
+        <li class="media pb-3 pt-3 mb-3 border-bottom" th:each="map : ${posts}">
             <a href="site/profile.html">
-                <img th:src=用户头像 class="mr-4 rounded-circle" alt="Avatar" style="width:50px;height:50px;">
+                <img th:src="${map.forumUser.avatar}"  class="mr-4 rounded-circle" alt="Avatar" style="width:50px;height:50px;">
             </a>
             <div class="media-body">
                 <h6 class="mt-0 mb-3">
-                    <a th:href=帖子ID th:utext=帖子标题>Bitcoin Mining Firm Marathon Digital Posts 91% Growth in Q3 !</a>
+                    <a th:utext="${map.post.title}">Bitcoin Mining Firm Marathon Digital Posts 91% Growth in Q3 !</a>
                 </h6>
 
                 <p class="mt-0 mb-3 ">
-                    <a th:href=帖子ID th:utext=帖子详情>以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了</a>
+                    <a th:utext="${map.post.post_content}" maxlength="20">以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了</a>
                 </p>
                 <div class="text-muted font-size-12">
-                    <u class="mr-3" th:utext=用户名username>Dongrui</u> Posted on <b th:text=发布时间>2021-10-05 19:35:28</b>
+                    <u class="mr-3" th:utext="${map.forumUser.uname}">Dongrui</u> Posted on <b th:text="${map.post.topic_time}">2021-10-05 19:35:28</b>
                     <ul class="d-inline float-right">
                         <li class="d-inline ml-2">Like 66</li>
                         <li class="d-inline ml-2">|</li>
@@ -110,31 +127,10 @@
         </li>
     </ul>
 
-    <br><br>
-    <ul class="shadowPureEffect postCard">
-        <li class="media pb-3 pt-3 mb-3 border-bottom" th:each=帖子>
-            <a href="site/profile.html">
-                <img th:src=用户头像 class="mr-4 rounded-circle" alt="Avatar" style="width:50px;height:50px;">
-            </a>
-            <div class="media-body">
-                <h6 class="mt-0 mb-3">
-                    <a th:href=帖子ID th:utext=帖子标题>Bitcoin Mining Firm Marathon Digital Posts 91% Growth in Q3 !</a>
-                </h6>
+    <br>
 
-                <p class="mt-0 mb-3 ">
-                    <a th:href=帖子ID th:utext=帖子详情>以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了以太坊又涨了</a>
-                </p>
-                <div class="text-muted font-size-12">
-                    <u class="mr-3" th:utext=用户名username>Dongrui</u> Posted on <b th:text=发布时间>2021-10-05 19:35:28</b>
-                    <ul class="d-inline float-right">
-                        <li class="d-inline ml-2">Like 66</li>
-                        <li class="d-inline ml-2">|</li>
-                        <li class="d-inline ml-2">Comments <span th:text="${map.post.commentCount}">15</span></li>
-                    </ul>
-                </div>
-            </div>
-        </li>
-    </ul>
+    <button class="loadMoreButton" style="width: 80%; height: 30px;" onclick="loadMoreButtonAction()">Load more</button>
+
 
 
 
