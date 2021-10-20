@@ -19,14 +19,14 @@ public class UserCommentServiceImpl implements UserCommentService{
 
     @Override
     public void createUserComment(UserComment comment) {
-        userCommentMapper.insertUserComment(comment.getCid(),comment.getUid(),comment.getPid());
+        userCommentMapper.insertUserComment(comment);
     }
 
     @Override
     public void updateUserComment(int id, UserComment comment) {
         userCommentMapper.deleteUserComment(id);
         comment.setCid(id);
-        userCommentMapper.insertUserComment(comment.getCid(),comment.getUid(),comment.getPid());
+        userCommentMapper.insertUserComment(comment);
     }
 
     @Override

@@ -3,12 +3,15 @@ package com.blockchainforum.service;
 import com.blockchainforum.dao.ThumbsMapper;
 import com.blockchainforum.entity.Thumbs;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+@Service
 public class ThumbServiceImpl implements ThumbService{
     //public static Map<Integer,Thumbs> thumbsMap=new HashMap<>();
     @Autowired

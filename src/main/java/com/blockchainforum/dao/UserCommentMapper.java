@@ -14,5 +14,5 @@ public interface UserCommentMapper {
     int updateUserComment(int uid, int pid, int cid, String comment);
   
     int deleteUserComment(int cid);
-
+    List<UserComment> selectCommentsByUid(int uid);
 }
