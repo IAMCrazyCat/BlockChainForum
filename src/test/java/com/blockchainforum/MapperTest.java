@@ -6,7 +6,6 @@ import com.blockchainforum.dao.MessageMapper;
 import com.blockchainforum.entity.ForumUser;
 import com.blockchainforum.entity.LoginTicket;
 import com.blockchainforum.entity.Message;
-import org.checkerframework.checker.units.qual.A;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@ContextConfiguration(classes = BlockchainformApplication.class)
+@ContextConfiguration(classes = BlockchainforumApplication.class)
 public class MapperTest {
 
     @Autowired

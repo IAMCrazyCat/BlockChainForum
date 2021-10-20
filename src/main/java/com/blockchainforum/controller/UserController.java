@@ -56,7 +56,7 @@ public class UserController {
     @LoginRequired
     @RequestMapping(path = "/setting", method = RequestMethod.GET)
     public String getSettingPage() {
-        return "/site/setting_yrj";
+        return "site/setting_yrj";
     }
 
     @RequestMapping(path = "/profile/{uid}", method = RequestMethod.GET)
@@ -66,6 +66,8 @@ public class UserController {
         List<Post> list = postService.findPosts(uid , page.getOffset(), page.getLimit());
         String avatar = userService.findUserById(uid).getAvatar();
         String username = userService.findUserById(uid).getUname();
+        String email = userService.findUserById(uid).getEmail();
+        String introduction = userService.findUserById(uid).getIntroduction();
 
         List<Map<String, Object>> posts = new ArrayList();
         if(list != null){
@@ -80,14 +82,16 @@ public class UserController {
         model.addAttribute("posts", posts);
         model.addAttribute("avatar", avatar);
         model.addAttribute("username", username);
-        return "/site/profile";
+        model.addAttribute("email", email);
+        model.addAttribute("introduction", introduction);
+        return "site/profile";
     }
     @LoginRequired
     @RequestMapping(path = "/upload", method = RequestMethod.POST)
     public String uploadAvatar(MultipartFile avatarImage, Model model) {
         if(avatarImage == null) {
             model.addAttribute("error", "No file uploaded");
-            return "/site/setting_yrj";
+            return "site/setting_yrj";
         }
 
         String fileName = avatarImage.getOriginalFilename();
@@ -95,7 +99,7 @@ public class UserController {
         String suffix = fileName.substring(fileName.lastIndexOf("."));
         if(StringUtils.isEmpty(suffix)) {
             model.addAttribute("error", "Incorrect Format!");
-            return "/site/setting_yrj";
+            return "site/setting_yrj";
         }
 
         fileName = CommunityUtil.generateUUID() + suffix;
@@ -115,8 +119,7 @@ public class UserController {
         ForumUser forumUser = hostHolder.getUser();
         String avatarURL = "http://123.56.59.240:8080/avatar" + "/" + fileName;
         userService.updateAvatar(forumUser.getUid(), avatarURL);
-
-        return "redirect:/index";
+        return "redirect:index";
     }
     @RequestMapping(path = "/avatar/{fileName}", method = RequestMethod.GET)
     public void getAvatar(@PathVariable("fileName") String fileName, HttpServletResponse response) {
@@ -137,6 +140,20 @@ public class UserController {
         }
     }
 
+    @RequestMapping(path = "/changeUsername", method = RequestMethod.POST)
+    public String changeUsername(String username){
+        ForumUser forumUser = hostHolder.getUser();
+        userService.updateUsername(forumUser.getUid(), username);
+        return "redirect:user/profile/" + forumUser.getUid();
+    }
+
+    @RequestMapping(path = "/changeIntroduction", method = RequestMethod.POST)
+    public String changeIntroduction(String introduction) {
+        ForumUser forumUser = hostHolder.getUser();
+        userService.updateIntroduction(forumUser.getUid(), introduction);
+        return "redirect:user/profile/" + forumUser.getUid();
+    }
+
     @RequestMapping(path = "/changePassword", method = RequestMethod.POST)
     public String changeUserPassword(String oldPassword, String newPassword, String confirmPassword, Model model){
 
@@ -147,11 +164,11 @@ public class UserController {
             System.out.println(CommunityUtil.md5(newPassword + forumUser.getSalt()));
             userService.updatePassword(forumUser.getUid(), CommunityUtil.md5(newPassword + forumUser.getSalt()));
             System.out.println(userService.findUserById(forumUser.getUid()).getPwd());
-            return "/site/setting_yrj";
+            return "site/setting_yrj";
         }else{
             model.addAttribute("confirmMsg", map.get("confirmMsg"));
             model.addAttribute("verifyMsg", map.get("verifyMsg"));
-            return "/site/setting_yrj";
+            return "site/setting_yrj";
         }
     }
 }

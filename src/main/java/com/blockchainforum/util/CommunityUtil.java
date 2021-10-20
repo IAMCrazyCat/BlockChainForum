@@ -44,9 +44,10 @@ public class CommunityUtil {
     }
 
     public static void main(String[] args) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("name", "haha");
-        map.put("age", 32);
-        System.out.println(getJSONString(0,"ok",map));
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("name", "haha");
+//        map.put("age", 32);
+//        System.out.println(getJSONString(0,"ok",map));
+        System.out.println(CommunityUtil.md5("yuruojie" + "eaabe"));
     }
 }

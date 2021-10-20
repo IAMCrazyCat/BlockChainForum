@@ -32,10 +32,16 @@
 
 
 
-            <p id="registerText" style="position: relative; top: 30px; text-align: center;" >Don't have an account yet? <span style="cursor: pointer; color: #c5464a;" onclick="goSignUpBtnAction()" id="goSignUpBtn"><b class="accentColorText">Sign up</b></span></p>
+            <p id="registerText" style="position: relative; top: 30px; text-align: center;" >Don't have an account yet? <span style="cursor: pointer; color: #c5464a;" th:href="@{/register}" onclick="goSignUpBtnAction()" id="goSignUpBtn"><b class="accentColorText">Sign up</b></span></p>
             <p id="forgotText"style="position: relative; top: 30px; text-align: center; cursor: pointer; display: none;" onclick="forgotPasswordAction()">Forget your password?</p>
         </div>
     </div>
 </div>
+
+<script>
+    function goSignUpBtnAction(){
+        window.location.href="/community/register"
+    }
+</script>
 </body>
 </html>

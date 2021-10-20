@@ -38,6 +38,14 @@
     <select id="selectAllPosts" resultType="Post">
         select <include refid="selectFields"></include>
         from post
+        order by topic_time desc
+        limit #{limit}
+        offset #{offset}
+    </select>
+
+    <select id="selectAllPostsCount" resultType="int">
+        select count(*)
+        from post
     </select>
     <insert id="insertPost" parameterType="Post" keyProperty="pid">
         insert into post (<include refid="insertFields"></include>)

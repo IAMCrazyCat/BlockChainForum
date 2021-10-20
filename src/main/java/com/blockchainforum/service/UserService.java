@@ -84,6 +84,7 @@ public class UserService implements CommunityConstant {
         forumUser.setIntroduction("Nothing");
         forumUser.setActivationCode(CommunityUtil.generateUUID());
         forumUser.setStatus(0);
+        forumUser.setAvatar("http:123.56.59.240:8080/avatar/c611b87517514bcc81497699f894985d.png");
 
 
         userMapper.insertUser(forumUser);
@@ -121,7 +122,8 @@ public class UserService implements CommunityConstant {
             map.put("username", "username cannot be null");
             return map;
         }
-        ForumUser forumUser = userMapper.selectByName(username);
+//        ForumUser forumUser = userMapper.selectByName(username);
+        ForumUser forumUser = userMapper.selectByEmail(username);
         if(forumUser == null) {
             map.put("usernameMsg", "This account does not exist");
             return map;
@@ -130,10 +132,10 @@ public class UserService implements CommunityConstant {
             map.put("usernameMsg", "This account has not been activated");
             return map;
         }
-//        System.out.println("login"+ password);
-//        System.out.println("login" + forumUser.getSalt());
+        System.out.println("login"+ password);
+        System.out.println("login" + forumUser.getSalt());
         password = CommunityUtil.md5(password + forumUser.getSalt());
-//        System.out.println("login"+ password);
+        System.out.println("login"+ password);
         if(! forumUser.getPwd().equals(password)) {
             map.put("passwordMsg", "Password is not correct");
             return map;
@@ -183,5 +185,13 @@ public class UserService implements CommunityConstant {
 
     public int updatePassword(int uid, String newPassword) {
         return userMapper.updateUserPwd(uid, newPassword);
+    }
+
+    public int updateUsername(int uid, String username){
+        return userMapper.updateUserName(uid, username);
+    }
+
+    public int updateIntroduction(int uid, String introduction) {
+        return userMapper.updateUserIntroduction(uid, introduction);
     }
 }

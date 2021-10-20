@@ -10,8 +10,9 @@ import java.util.List;
 public interface PostMapper {
     List<Post> selectPosts(int uid, int offset, int limit);
     int selectDiscussionPostRows(@Param("uid") int uid);
+    int selectAllPostsCount();
     Post selectPostById(int id);
-    List<Post> selectAllPosts();
+    List<Post> selectAllPosts(int offset, int limit);
     int insertPost(Post post);
     int updatePostComment(int uid, int pid, String content);
     int updatePostNiceTopic(int uid, int pid, boolean nice_topic);

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" th:href="@{/css/global.css}" />
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
+    <title>HackInBlockChain-Login</title>
+</head>
+<body>
+<div id="card" class="card">
+    <div id="frontBox" class="shadowEffect" style="top:100px; width: 350px; height: 450px;">
+        <div id="frontBoxContent" class="cardText">
+            <h1>Create an account</h1>
+            <p id="tipText">Join hackInBlockChain.com today.</p>
+
+
+            <br>
+            <form id="signInForm" th:action="@{/register}" method="post" style="position:relative; top:-18px;">
+                <p>Nickname</p>
+                <input class="textField" type="password" id="username" name="password" oninput="hideError()">
+                <p>Email address</p>
+                <input id="forwardType" name="uname" value="login" th:value="${forumuser!=null?forumuser.uname:''}" style="display:none">
+                <input class="textField" id="email" name="email" th:value="${forumuser!=null?forumuser.email:''}" oninput="hideError()">
+                <p id="loginEmailEmpty" style="display:none; color:red;">Plase enter your Email address</p>
+                <p>Password</p>
+                <input class="textField" type="password" id="password" name="pwd" th:value="${forumuser!=null?forumuser.pwd:''}" oninput="hideError()">
+                <p>Confirm your password</p>
+                <input class="textField" type="password" id="confirmpassword" name="pwd" th:value="${forumuser!=null?forumuser.pwd:''}" oninput="hideError()">
+
+
+                <p id="loginPasswordEmpty" style="display:none; color:red;">Plase enter your password</p>
+                <p id="loginPasswordWrong" style="display:none; color:red;">Please fill in all the required options</p>
+            </form>
+
+            <button class="mainButton" onclick="signInBtnAction()"><span id="btnText"class="mainButtonText">Sign up</span></button>
+
+            <p id="registerText" style="position: relative; top: 10px; text-align: center;" >Already have an account? <span style="cursor: pointer; color: #c5464a;" th:href="@{/login}" onclick="goSignUpBtnAction()" id="goSignUpBtn"><b class="accentColorText">Sign in</b></span></p>
+            <p id="forgotText"style="position: relative; top: 30px; text-align: center; cursor: pointer; display: none;" onclick="forgotPasswordAction()">Forget your password?</p>
+        </div>
+    </div>
+</div>
+<script>
+    function goSignUpBtnAction(){
+        window.location.href="/community/login"
+    }
+</script>
+</body>
+</html>

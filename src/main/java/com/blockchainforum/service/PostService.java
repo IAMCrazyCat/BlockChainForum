@@ -21,7 +21,9 @@ public class PostService {
         return postMapper.selectDiscussionPostRows(uid);
     }
 
-    public List<Post> findAllPosts() { return postMapper.selectAllPosts();}
+    public List<Post> findAllPosts(int offset, int limit) { return postMapper.selectAllPosts(offset, limit);}
+
+    public int findAllPostsCount() { return postMapper.selectAllPostsCount();}
 
     public int addPost(Post post) {
         if(post == null) {

@@ -28,10 +28,10 @@ import java.util.Map;
 @Controller
 public class LoginController implements CommunityConstant {
     @RequestMapping(path="/register", method = RequestMethod.GET)
-    public String getRegisterPage() {return "/site/register_yrj";}
+    public String getRegisterPage() {return "site/register";}
 
     @RequestMapping(path="/login", method = RequestMethod.GET)
-    public String getLoginPage() {return "/site/login";}
+    public String getLoginPage() {return "site/login";}
 
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
     @Autowired
@@ -46,12 +46,12 @@ public class LoginController implements CommunityConstant {
         if(map == null || map.isEmpty()) {
             model.addAttribute("msg", "Successfully send an email to you");
             model.addAttribute("target", "/index");
-            return "/site/operate-result_yrj";
+            return "site/operate-result_yrj";
         }else{
             model.addAttribute("userNameMsg", map.get("userNameMsg"));
             model.addAttribute("passwordMsg", map.get("passwordMsg"));
             model.addAttribute("emailMsg", map.get("emailMsg"));
-            return "/site/register_yrj";
+            return "site/register";
         }
     }
 
@@ -69,7 +69,7 @@ public class LoginController implements CommunityConstant {
             model.addAttribute("msg", "Failed to activate!");
             model.addAttribute("target","/index");
         }
-        return "operate-result_yrj";
+        return "site/operate-result_yrj";
     }
 
     @RequestMapping(path = "/kaptcha", method = RequestMethod.GET)
@@ -106,13 +106,13 @@ public class LoginController implements CommunityConstant {
         } else {
             model.addAttribute("usernameMsg", map.get("usernameMsg"));
             model.addAttribute("passwordMsg",map.get("passwordMsg"));
-            return "/site/login";
+            return "site/login";
         }
     }
 
     @RequestMapping(path = "/logout", method = RequestMethod.GET)
     public String logout(@CookieValue("ticket") String ticket) {
         userService.logout(ticket);
-        return "redirect:/login";
+        return "redirect:login";
     }
 }

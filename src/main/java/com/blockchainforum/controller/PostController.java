@@ -76,6 +76,6 @@ public class PostController {
         }
 
         model.addAttribute("comments", commentVoList);
-        return "discuss-detail_yrj";
+        return "site/discuss-detail_yrj";
     }
 }

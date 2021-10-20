@@ -41,9 +41,9 @@
 									<img src="http://images.nowcoder.com/head/1t.png" class="rounded-circle" style="width:30px;"/>
 								</a>
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<a class="dropdown-item text-center" href="profile_1.html">个人主页</a>
-									<a class="dropdown-item text-center" href="setting_yrj.html">账号设置</a>
-									<a class="dropdown-item text-center" href="login_yrj.html">退出登录</a>
+									<a class="dropdown-item text-center" th:href="@{|/user/profile/${loginUser.uid}|}" style="color: black">Profile</a>
+									<a class="dropdown-item text-center" th:href="@{/user/setting}" style="color: black">Settings</a>
+									<a class="dropdown-item text-center" th:href="@{logout}" style="color: black">Logout</a>
 									<div class="dropdown-divider"></div>
 									<span class="dropdown-item text-center text-secondary">nowcoder</span>
 								</div>

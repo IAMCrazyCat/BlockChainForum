@@ -27,6 +27,6 @@ public class CommentController {
         userComment.setCreateTime(new Timestamp(System.currentTimeMillis()));
         commentService.addComment(userComment);
 
-        return "redirect:/post/detail/" + pid;
+        return "redirect:post/detail/" + pid;
     }
 }
