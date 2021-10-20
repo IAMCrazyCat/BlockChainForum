@@ -30,9 +30,9 @@ header {
 }
 
 header .navbar-brand {
-	background: url('../images/BlackChainIcon.png') no-repeat;
-	background-size: 147px 42px;
-	width: 147px;
+	background: url('http://123.56.59.240:8080/avatar/blockchain.png') no-repeat;
+	background-size: 42px 42px;
+	width: 42px;
 	height: 42px;
 	margin: 5px 15px 5px 0;
 }

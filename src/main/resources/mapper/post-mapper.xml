@@ -5,7 +5,7 @@
 
 <mapper namespace="com.blockchainforum.dao.PostMapper">
     <sql id="selectFields">
-        pid, uid, title, post_content, status, topic_time, topic_catagory, viewed_number, nice_topic, thumbs_up
+        pid, uid, title, post_content, status, topic_time, topic_catagory, viewed_number, nice_topic, thumbs_up, count
     </sql>
     <sql id="insertFields">
         uid, title, post_content, status, topic_time, topic_catagory, viewed_number, nice_topic, thumbs_up, count
